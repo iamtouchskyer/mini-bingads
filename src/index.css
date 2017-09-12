@@ -1,3 +1,6 @@
+@import url('../node_modules/bootstrap/dist/css/bootstrap.css');
+@import url('bs-override.css');
+
 body {
   margin: 0;
   padding: 0;
