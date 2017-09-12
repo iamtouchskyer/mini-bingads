@@ -1,11 +1,11 @@
 import React from 'react';
-import _ from 'underscore';
 import Header from './header.js';
 import Wunderbar from './wunderbar.js';
 import AlertGroup from './alert-group.js';
 import CampaignNavBar from './campaign-nav-bar.js';
 import Toolbar from './toolbar/index.js';
 import Grid from './grid/index.js';
+import DatePicker from './components/datepicker.js';
 
 class BingAds extends React.Component {
     render() {
@@ -14,12 +14,16 @@ class BingAds extends React.Component {
                 <Header />
                 
                 <div style={{width: '100%'}}> 
-                    <div style={{float:'left', width: '15%'}}>
+                    <div style={{float:'left', width: '220px'}}>
                         <Wunderbar />
                     </div> 
-                    <div style={{float:'right', width: '83%'}}> 
+                    <div style={{float:'right', width: '85%'}}> 
                         <AlertGroup />    
-                        <h3 className="bold"> All Campaigns </h3>
+                        <div>
+                            <span className="h3">All Campaigns</span>
+                            <span className="pull-right"> <DatePicker /></span>
+                        </div>
+                        <p/> <p/> <p/>
                         <CampaignNavBar />
                         <p/> <p/> <p/>
                         <Toolbar />

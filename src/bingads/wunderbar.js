@@ -5,9 +5,9 @@ class Wunderbar extends React.Component {
     render () {
         return (
             <div>
-                <div className="form-group dropdown from-group-xs">
+                <div className="form-group dropdown">
                     <label className="control-label">Selected Account</label> 
-                    <button className="form-control btn-xs" type="button" data-toggle="dropdown" role="button">touchskyer00 - B0105ULF<span className="caret"></span></button>
+                    <button className="btn btn-default btn-block" type="button" data-toggle="dropdown">touchskyer00 - B0105ULF<span className="glyphicon glyphicon-chevron-down pull-right"></span></button>
                     <ul className="dropdown-menu" role="menu">
                         <li><a href="#" role="menuitem">touchskyer00 - B0105ULF</a></li>
                         <li><a href="#" role="menuitem">touchskyer01 - B010E7GZ</a></li>

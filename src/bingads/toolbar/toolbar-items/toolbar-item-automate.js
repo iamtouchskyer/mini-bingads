@@ -4,7 +4,7 @@ class ToolbarItemAutomate extends Component {
     render() {
         return (
             <span className="dropdown">
-            <button className="btn btn-default" data-toggle="dropdown" role="button">Automate<span className="caret"></span></button>
+            <button className="btn btn-default" data-toggle="dropdown">Automate<span className="caret"></span></button>
             <ul className="dropdown-menu" role="menu"> 
                 <li className="dropdown-header">Create rule for Campaigns</li>
                 <li><a href="javascript:void(0);" role="menuitem">Change budget when...</a></li>

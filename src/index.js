@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 global.jQuery = jQuery
 global.jquery = jQuery // jquery lowercase  was the solution
 global.$ = jQuery
-let Bootstrap = require('bootstrap');
+require('bootstrap');
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

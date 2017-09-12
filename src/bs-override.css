@@ -6856,6 +6856,10 @@ button.close {
     border-bottom: 5px solid transparent;
 }
 
+.dropdown-menu > li .glyphicon {
+  width: 12px;
+}
+  
 .dropdown-submenu {
     position: relative;
 }
@@ -6867,7 +6871,7 @@ button.close {
 }
 
 .glyphicon {
-    padding-right: 5px;
+    margin-right: 6px;
 }
 
 .badge {
@@ -6889,4 +6893,8 @@ table tr > input[type="radio"] {
 
 .form-text {
     margin: 10px;
+}
+
+.container {
+  width: 1600px;
 }

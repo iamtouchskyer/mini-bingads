@@ -15,7 +15,7 @@ class BingAdsToolbar extends Component {
         this.toolbarElement = (
             <div className="btn-toolbar btn-toolbar-group" role="toolbar">
                 <div className="btn-group btn-group-primary" role="group">
-                    <button className="btn btn-primary" role="button">Create Campaign</button>
+                    <button className="btn btn-primary">Create Campaign</button>
                     <ToolbarItemBulkEdit callback={this.handleToolbarItemClick.bind(this)}/>
                     <ToolbarItemDetails callback={this.handleToolbarItemClick.bind(this)}/>
                     <ToolbarItemAutomate callback={this.handleToolbarItemClick.bind(this)}/>
