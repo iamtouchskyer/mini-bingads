@@ -2,53 +2,40 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 import _ from 'underscore';
 import BootStrapDatePicker from 'bootstrap-datepicker';
+import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
+import './datepicker-override.css';
 
 class DatePicker extends Component {
     constructor() {
         super();
 
-        this.state = {
-            checkedIndex: -1,
-        };
-
         this.generateDateMenu();
-    }
 
-    handleClick(e) {
-        /*
-        if (e && e.target && e.target.id) {
-            const index = parseInt(e.target.id.replace(DatePicker.menuIdPrefix(), ""), 10);
-
-            if (index >= 0 && index < _.size(this.metaData)) {
-                this.setState({checkedIndex:index});
-            }
-
-            if (index === 0) {
-                ;
-            } else {
-                $(this).parent().toggleClass('close');
-            }
-        }
-        */
+        this.state = {
+            checkedIndex: this.props && this.props.index ? this.props.index : 1,
+        };
     }
 
     static menuIdPrefix() {
         return "DatePicker-Item-";
     }
 
+    generateBtnText(index) {
+        return this.metaData[index].title + (this.metaData[index].element ? ': ' + this.metaData[index].element : '');
+    }
+
     generateCustomizedDatePicker() {
         this.metaData[0].element = (
             <span className="form-inline" id="CustomizedDatePicker">
-                <span className="form-group-sm">
+                <span className="form-group-xs">
                     <span className="input-daterange input-group">
-                        <input type="text" className="input-sm form-control" name="start" />
+                        <input type="text" className="form-control" name="start" />
                         <span className="input-group-addon">to</span>
-                        <input type="text" className="input-sm form-control" name="end" />
+                        <input type="text" className="form-control" name="end" />
                     </span>
                 </span>
             </span>
         );
-
     }
 
     generateDateMenu() {
@@ -150,11 +137,10 @@ class DatePicker extends Component {
 
             return (
                 <li role="menuitem">
-                    <a href="javascript:void(0)" id={DatePicker.menuIdPrefix() + index++} onClick={this.handleClick.bind(this)}> 
+                    <a href="javascript:void(0)" id={DatePicker.menuIdPrefix() + index++}>
                         <span className={"glyphicon " + additionalClass}></span>
                         {item.title}
-                        {index === 1 && <span className="pull-right" style={{width:'50%'}}>{item.element}</span>}
-                        {index >1 && <span className="pull-right">{item.element}</span>}
+                        <span className="pull-right text-right" style={{width:'50%'}}>{item.element}</span>
                     </a> 
                 </li>
             );
@@ -163,7 +149,7 @@ class DatePicker extends Component {
         return (
             <div className="dropdown datepicker-dropdown" style={{width:"500px"}}> 
                 <button type="button" className="btn btn-default btn-sm btn-block">
-                    <span className="pull-left">Click me</span>
+                    <span className="pull-left bold">{this.generateBtnText(this.state.checkedIndex)}</span>
                     <span className="glyphicon glyphicon-chevron-down pull-right"></span>
                 </button>
                 <ul className="dropdown-menu" style={{width:"100%"}}>
