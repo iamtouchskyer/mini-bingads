@@ -9,11 +9,11 @@ class DatePicker extends Component {
     constructor() {
         super();
 
-        this.generateDateMenu();
-
         this.state = {
             checkedIndex: this.props && this.props.index ? this.props.index : 1,
         };
+
+        this.generateDateMenu();
     }
 
     static menuIdPrefix() {
@@ -21,32 +21,29 @@ class DatePicker extends Component {
     }
 
     generateBtnText(index) {
-        return this.metaData[index].title + (this.metaData[index].element ? ': ' + this.metaData[index].element : '');
-    }
-
-    generateCustomizedDatePicker() {
-        this.metaData[0].element = (
-            <span className="form-inline" id="CustomizedDatePicker">
-                <span className="form-group-xs">
-                    <span className="input-daterange input-group">
-                        <input type="text" className="form-control" name="start" />
-                        <span className="input-group-addon">to</span>
-                        <input type="text" className="form-control" name="end" />
-                    </span>
-                </span>
-            </span>
-        );
+        return this.metaData[index].title + (_.isString(this.metaData[index].element) ? ': ' + this.metaData[index].element : '');
     }
 
     generateDateMenu() {
         const today = new Date();
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
 
         this.metaData = [
-           {title: 'Custom',        element: null},
+            {title: 'Custom',        element: (() => {
+                return (
+                    <span className="form-inline" id="CustomizedDatePicker" style={{display: this.state.checkedIndex === 0 ? '' : 'none'}}>
+                        <span className="form-group-xs">
+                            <span className="input-daterange input-group">
+                                <input type="text" className="form-control" name="start" />
+                                <span className="input-group-addon">to</span>
+                                <input type="text" className="form-control" name="end" />
+                            </span>
+                        </span>
+                    </span>)
+            })},
            {title: 'Today',         element: today.toLocaleDateString()},
            {title: 'Yesterday',     element: (() => {
-                        let yesterday = new Date(); 
-                        yesterday.setDate(yesterday.getDate()-1);
                         return yesterday.toLocaleDateString();
                 })()},  
            {title: 'This week (Sun - Today)',     element: (() => {
@@ -65,31 +62,52 @@ class DatePicker extends Component {
                 })()},  
            {title: 'Last 7 days',                 element: (() => {
                         let last7Day = new Date(); last7Day.setDate(last7Day.getDate()-7);
-                        return last7Day.toLocaleDateString() + ' - ' + today.toLocaleDateString();
+                        return last7Day.toLocaleDateString() + ' - ' + yesterday.toLocaleDateString();
                 })()},  
-           {title: 'Last week (Sun - Today)',     element: (() => {
-                        let yesterday = new Date(); yesterday.setDate(yesterday.getDate());
+           {title: 'Last week (Sun - Sat)',     element: (() => {
+                        let dayOfToday = today.getDay();
+                        let lastLastSunday = new Date(); 
+                        let lastSaturday = new Date(); 
+
+                        lastLastSunday.setDate(lastLastSunday.getDate() - 7 - dayOfToday);
+                        lastSaturday.setDate(lastSaturday.getDate() - 1 - dayOfToday);
+
+                        return lastLastSunday.toLocaleDateString() + ' - ' + lastSaturday.toLocaleDateString();
+
                         return yesterday.toLocaleDateString();
                 })()},  
-           {title: 'Last week (Mon - Today)',     element: (() => {
-                        let yesterday = new Date(); yesterday.setDate(yesterday.getDate());
-                        return yesterday.toLocaleDateString();
-                })()},  
-           {title: 'This month',                  element: (() => {
-                        let yesterday = new Date(); yesterday.setDate(yesterday.getDate());
-                        return yesterday.toLocaleDateString();
-                })()},  
-           {title: 'Last month',                  element: (() => {
-                        let yesterday = new Date(); yesterday.setDate(yesterday.getDate());
-                        return yesterday.toLocaleDateString();
+           {title: 'Last week (Mon - Sun)',     element: (() => {
+                        let dayOfToday = today.getDay();
+                        let lastMonday = new Date(); 
+                        let lastSunday = new Date(); 
+
+                        lastMonday.setDate(lastMonday.getDate() - 7 - dayOfToday + 1);
+                        lastSunday.setDate(lastSunday.getDate() - dayOfToday);
+
+                        return lastMonday.toLocaleDateString() + ' - ' + lastSunday.toLocaleDateString();
                 })()},  
            {title: 'last 14 days',                element: (() => {
                         let last14Day = new Date(); last14Day.setDate(last14Day.getDate()-14);
-                        return last14Day.toLocaleDateString() + ' - ' + today.toLocaleDateString();
+                        return last14Day.toLocaleDateString() + ' - ' + yesterday.toLocaleDateString();
+                })()},  
+           {title: 'This month',                  element: (() => {
+                        let beginningOfThisMonth = new Date(); 
+                        beginningOfThisMonth.setDate(1);
+                        return beginningOfThisMonth.toLocaleDateString() + ' - ' + today.toLocaleDateString();
+                })()},  
+           {title: 'Last month',                  element: (() => {
+                        let beginningOfLastMonth = new Date(); 
+                        let endOfLastMonth = new Date(); 
+
+                        beginningOfLastMonth.setMonth(beginningOfLastMonth.getMonth() - 1);
+                        beginningOfLastMonth.setDate(1);
+                        endOfLastMonth.setDate(0);
+
+                        return beginningOfLastMonth.toLocaleDateString() + ' - ' + endOfLastMonth.toLocaleDateString();
                 })()},  
            {title: 'last 30 days',                element: (() => {
                         let last30Day = new Date(); last30Day.setDate(last30Day.getDate()-30);
-                        return last30Day.toLocaleDateString() + ' - ' + today.toLocaleDateString();
+                        return last30Day.toLocaleDateString() + ' - ' + yesterday.toLocaleDateString();
                 })()},  
         ];
     }
@@ -131,7 +149,6 @@ class DatePicker extends Component {
 
     render() {
         let index = 0;
-        this.generateCustomizedDatePicker();
         this.dateMenu = _.map(this.metaData, (item) => {
             const additionalClass = this.state.checkedIndex === index ? "glyphicon-ok" : "";
 
@@ -140,11 +157,20 @@ class DatePicker extends Component {
                     <a href="javascript:void(0)" id={DatePicker.menuIdPrefix() + index++}>
                         <span className={"glyphicon " + additionalClass}></span>
                         {item.title}
-                        <span className="pull-right text-right" style={{width:'50%'}}>{item.element}</span>
+                        <span className="pull-right text-right" style={{width:'50%'}}>{_.isFunction(item.element) ? item.element() : item.element}</span>
                     </a> 
                 </li>
             );
         });
+
+        this.popMenu = (
+            <li className="fake-a">
+                <button type="button" className="btn btn-primary btn-sm">Apply</button>
+                <span className="checkbox pull-right">
+                    <input type="checkbox"/>Compare
+                </span>
+            </li>
+        );
 
         return (
             <div className="dropdown datepicker-dropdown" style={{width:"500px"}}> 
@@ -154,6 +180,8 @@ class DatePicker extends Component {
                 </button>
                 <ul className="dropdown-menu" style={{width:"100%"}}>
                     {this.dateMenu}
+                    <li className="divider"></li>
+                    {this.popMenu}
                 </ul>
             </div>
         );      
