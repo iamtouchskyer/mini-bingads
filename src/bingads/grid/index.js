@@ -6,7 +6,134 @@ import { HttpAdapter } from 'js-data-http';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
+_.mixin({
+    treeHeight: (object) => {
+        if (_.isUndefined(object)) {
+            return 0;
+        }
+
+        var maxHeight = 0;
+        _.each(object, (objectItem) => {
+            if (_.isArray(objectItem)) {
+                objectItem = objectItem[0];
+            }
+            
+            if (_.isObject(objectItem)) {
+                var height = _.treeHeight(objectItem);
+
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            } 
+        });
+
+        return maxHeight + 1;
+    },
+
+    allFlattenRecursiveKeys: (object) => {
+        if (_.isUndefined(object)) {
+            return null;
+        }
+
+        return _.flatten(_.allRecursiveKeys(object));
+    },
+
+    allRecursiveKeys: (object) => {
+        if (_.isUndefined(object)) {
+            return null;
+        }
+
+        var allKeys = _.map(_.allKeys(object), (itemKey) => {
+            var subObject = object[itemKey]; 
+            if (_.isArray(subObject)) {
+                subObject = subObject[0];
+            }
+
+            if (_.isObject(subObject)) {
+                return _.chain(subObject)
+                                .allRecursiveKeys()
+ //                             .map((subKey) => itemKey + '.' + subKey)
+                                .value();
+            } else {
+                return itemKey;
+            }
+        });
+
+        return allKeys;
+    },
+
+    tableHeader: (tableThs, object, index) => {
+        if (_.isUndefined(object)) {
+            return;
+        }
+
+        const maxHeight = _.treeHeight(object);
+        _.each(_.allKeys(object), (key) => {
+            var subObject = object[key]; 
+            if (_.isArray(subObject)) {
+                subObject = subObject[0];
+            }
+
+            if (_.isObject(subObject)) {
+                 tableThs[index].push(<th rowSpan="1" colSpan={_.size(_.allFlattenRecursiveKeys(subObject))} style={{vertialAlign:"top"}}>
+                    <span className="glyphicon glyphicon-triangle-bottom"></span>
+                 {key}</th>);
+
+                 _.tableHeader(tableThs, subObject, index+1);
+            } else {
+                tableThs[index].push((<th rowSpan={maxHeight} colSpan="1">{key}</th>));
+            }
+        });
+    },
+
+    tableHeaders: (object) => {
+        if (_.isUndefined(object)) {
+            return null;
+        }
+
+        var tableThs = [[],[],[],[],[]];
+
+        _.tableHeader(tableThs, object, 0);
+
+        return _.map(tableThs, (tableTh) => {
+                return (<tr>{tableTh}</tr>);
+            });
+    }
+  });
+
 class Grid extends Component {
+
+/*
+    tableCols(object) {
+        if (_.isUndefined(object)) {
+            return null;
+        }
+        function calculateTableCol(object, height) {
+            if (_.isUndefined(object)) {
+                return null;
+            }
+
+            var allColmns = _.map(_.allKeys(object), (itemKey) => {
+                var subObject = object[itemKey]; 
+                if (_.isArray(subObject)) {
+                    subObject = subObject[0];
+                }
+
+                if (_.isObject(subObject)) {
+                    return _.chain(subObject)
+                                    .calculateTableCol()
+                                    .map((subKey) => itemKey + '.' + subKey)
+                                    .value();
+                } else {
+                    return {key: itemKey, hidden:false};
+                }
+            });
+
+        }
+
+        return allKeys;
+    }
+*/
     constructor() {
         super();
 
@@ -23,21 +150,23 @@ class Grid extends Component {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const responseObj = JSON.parse(xhr.responseText);
 
-                this.titles = _.allKeys(responseObj.value[0]);
+                this.titles = _.tableHeaders(responseObj.value[0]);
                 this.rows = _.map(responseObj.value, (item) => {
                     let cols = _.map(_.values(item), (val) => {
                         if (_.isArray(val)) {
-                            return "Array";
-                        } else if (_.isObject(val)) {
-                            return "Object";
+                            val =  val[0];
+                        } 
+
+                        if (_.isObject(val)) {
+                            return 'Object';
                         } else if (_.isNull(val)) {
-                            return "Null";
+                            return "";
                         } else {
                             return val;
                         }
                     });
 
-                    return cols;
+                    return _.flatten(cols);
                 });
 
                 this.setState({blocking: false});
@@ -60,9 +189,7 @@ class Grid extends Component {
                 <BlockUi tag="div" blocking={this.state.blocking}>
                     <table className="table table-bordered table-hover">
                         <thead>
-                            <tr>
-                                {this.titles.map(title => <th key={title}>{title}</th>)}
-                            </tr>
+                                {this.titles}
                         </thead> 
                         <tbody>
                             {this.rows.map((row, i) => <tr key={i}> {row.map((col, j) => <td key={j}>{col}</td>)}</tr>)}
