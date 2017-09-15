@@ -6805,6 +6805,18 @@ button.close {
     border-radius: 0px 0px 0 0;
 }
 
+.navbar-nav > .active > a:after, .navbar-nav > .active > a:focus:after, .navbar-nav > .active > a:hover:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  content: ' ';
+  width: 90%;
+  background: #008272;
+  height: 3px;
+}
+
 .btn-group-primary .btn:not(.btn-primary) {
     background-color: #EEE;
 }
