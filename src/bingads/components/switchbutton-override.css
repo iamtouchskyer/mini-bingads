@@ -1,0 +1,20 @@
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label:after,
+.rsbc-switch-button.rsbc-switch-button-flat-square input[type="checkbox"]:checked + label:after {
+    background-color: #008272;
+}
+
+.rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"] + label,
+.rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked + label,
+.rsbc-switch-button.rsbc-switch-button-flat-square:hover input[type="checkbox"] + label,
+.rsbc-switch-button.rsbc-switch-button-flat-square input[type="checkbox"]:checked + label {
+    background-color: #008272;
+}
+
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-round.rsbc-mode-select input[type="checkbox"] + label:after,
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-round.rsbc-mode-select:hover input[type="checkbox"]:checked + label,
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-round.rsbc-mode-select input[type="checkbox"] + label,
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-square.rsbc-mode-select input[type="checkbox"] + label:after,
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-square.rsbc-mode-select:hover input[type="checkbox"]:checked + label,
+.rsbc-switch-button.rsbc-switch-button.rsbc-switch-button-flat-square.rsbc-mode-select input[type="checkbox"] + label {
+    background-color: #008272 !important;
+}

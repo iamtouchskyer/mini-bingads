@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import _ from 'underscore';
+import SwitchButton from 'react-switch-button';
+import 'react-switch-button/dist/react-switch-button.css';
 import BootStrapDatePicker from 'bootstrap-datepicker';
 import 'bootstrap-datepicker/dist/css/bootstrap-datepicker3.css';
 import './datepicker-override.css';
+import './switchbutton-override.css';
 
 class DatePicker extends Component {
     constructor() {
@@ -11,9 +14,11 @@ class DatePicker extends Component {
 
         this.state = {
             checkedIndex: this.props && this.props.index ? this.props.index : 1,
+            popToggleState: false,
         };
 
         this.generateDateMenu();
+        this.generatePOPMenu();
     }
 
     static menuIdPrefix() {
@@ -21,18 +26,13 @@ class DatePicker extends Component {
     }
 
     generateBtnText(index) {
-        return this.metaData[index].title + (_.isString(this.metaData[index].element) ? ': ' + this.metaData[index].element : '');
+        return this.dateMetaData[index].title + (_.isString(this.dateMetaData[index].element) ? ': ' + this.dateMetaData[index].element : '');
     }
 
-    generateDateMenu() {
-        const today = new Date();
-        let yesterday = new Date();
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        this.metaData = [
-            {title: 'Custom',        element: (() => {
+    generateDateMenuItem(idAffix) {
+        return {title: 'Custom',        element: (() => {
                 return (
-                    <span className="form-inline" id="CustomizedDatePicker" style={{display: this.state.checkedIndex === 0 ? '' : 'none'}}>
+                    <span className="form-inline" id={"CustomizedDatePicker"+idAffix} style={{display: this.state.checkedIndex === 0 ? '' : 'none'}}>
                         <span className="form-group-xs">
                             <span className="input-daterange input-group">
                                 <input type="text" className="form-control" name="start" />
@@ -41,7 +41,25 @@ class DatePicker extends Component {
                             </span>
                         </span>
                     </span>)
-            })},
+            })};
+    }
+
+    generatePOPMenu() {
+        this.POPMetaData = [
+            {title: 'Previous period',          element: null},
+            {title: 'Same period last year',    element: null},
+            this.generateDateMenuItem('POP'),
+        ];
+//            (this.state.popToggleState && <li className="fake-a"> <button type="button" className="btn btn-primary btn-sm">Apply</button> </li>),
+    }
+
+    generateDateMenu() {
+        const today = new Date();
+        let yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        this.dateMetaData = [
+            this.generateDateMenuItem('Date'),
            {title: 'Today',         element: today.toLocaleDateString()},
            {title: 'Yesterday',     element: (() => {
                         return yesterday.toLocaleDateString();
@@ -120,7 +138,7 @@ class DatePicker extends Component {
         $('.dropdown.datepicker-dropdown > ul.dropdown-menu > li > a').on('click', function (e) {
             const index = parseInt(e.target.id.replace(DatePicker.menuIdPrefix(), ""), 10);
 
-            if (index >= 0 && index < _.size(this.metaData)) {
+            if (index >= 0 && index < _.size(this.dateMetaData)) {
                 this.setState({checkedIndex:index});
             }
 
@@ -139,7 +157,7 @@ class DatePicker extends Component {
             }
         });
 
-        $('#CustomizedDatePicker .input-daterange').datepicker({
+        $('[id^="CustomizedDatePicker"] .input-daterange').datepicker({
             clearBtn: true,
             keyboardNavigation: true,
             forceParse: true,
@@ -147,9 +165,13 @@ class DatePicker extends Component {
         });
     }
 
-    render() {
+    popToggleDidChange(e) {
+        this.setState({popToggleState:e.target.checked});
+    }
+
+    metaDataToMenu(metaData) {
         let index = 0;
-        this.dateMenu = _.map(this.metaData, (item) => {
+        return _.map(metaData, (item) => {
             const additionalClass = this.state.checkedIndex === index ? "glyphicon-ok" : "";
 
             return (
@@ -162,15 +184,11 @@ class DatePicker extends Component {
                 </li>
             );
         });
+    }
 
-        this.popMenu = (
-            <li className="fake-a">
-                <button type="button" className="btn btn-primary btn-sm">Apply</button>
-                <span className="checkbox pull-right">
-                    <input type="checkbox"/>Compare
-                </span>
-            </li>
-        );
+    render() {
+        this.dateMenu = this.metaDataToMenu(this.dateMetaData);
+        this.popMenu = this.metaDataToMenu(this.POPMetaData);
 
         return (
             <div className="dropdown datepicker-dropdown" style={{width:"500px"}}> 
@@ -181,7 +199,14 @@ class DatePicker extends Component {
                 <ul className="dropdown-menu" style={{width:"100%"}}>
                     {this.dateMenu}
                     <li className="divider"></li>
-                    {this.popMenu}
+            <li className="fake-a">
+                {!this.state.popToggleState && (<button type="button" className="btn btn-primary btn-sm">Apply</button>)}
+                <span className="pull-right">
+                    <SwitchButton label="COMPARE" labelRight={this.state.popToggleState ? "On" : "Off"} defaultChecked={false} onChange={this.popToggleDidChange.bind(this)}/>
+                </span>
+            </li>
+                    {this.state.popToggleState && this.popMenu}
+                    {this.state.popToggleState && (<li className="fake-a"> <button type="button" className="btn btn-primary btn-sm">Apply</button> </li>)}
                 </ul>
             </div>
         );      

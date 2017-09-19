@@ -9,10 +9,12 @@
     "jquery": "^3.2.1",
     "js-data": "^3.0.1",
     "js-data-http": "^3.0.0",
+    "projection-grid": "^0.1.5",
     "react": "^15.6.1",
     "react-block-ui": "^1.0.3",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
+    "react-switch-button": "^2.2.2",
     "underscore": "^1.8.3"
   },
   "scripts": {
