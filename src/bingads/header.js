@@ -25,6 +25,15 @@ class Header extends React.Component {
                                 <li><a href="http://go.microsoft.com/fwlink/?LinkID=193932">Bing Ads Editor</a></li>
                             </ul>
                         </li>
+                        <li className="dropdown">
+                            <a href="javascript:void(0)" className="dropdown-toggle" data-toggle="dropdown">Import Campaigns&nbsp;<span className="caret"></span></a>
+                            <ul className="dropdown-menu">
+                                <li><a href="javascript:void(0)" data-toggle="tab" data-target="#AdPreview">Import from Google Adwords</a></li>                           
+                                <li><a href="javascript:void(0)" data-toggle="tab" data-target="#KeywordPlanner">Import from file</a></li>                           
+                                <li className="divider"></li>
+                                <li><a href="javascript:void(0)" data-toggle="tab" data-target="#BingMerchantCenter">Import schedule and history</a></li>                           
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
