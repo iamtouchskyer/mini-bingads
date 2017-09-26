@@ -87,23 +87,24 @@ class Dropdown extends Component {
         this.setState({refreshNeeded:!this.state.refreshNeeded});
     }
 
-    onType(event) {
+    onType(value) {
         if (this.searchControl.timer) {
             clearTimeout(this.searchControl.timer);
             this.searchControl.timer = null;
         }
 
-        this.searchControl.timer = setTimeout(this.doSearch.bind(this, event.target.value), 500);
+        this.searchControl.timer = setTimeout(this.doSearch.bind(this, value), 500);
     }
 
-    onSearch(event) {
-        this.doSearch(event.target.value);
+    onSearch(value) {
+        this.doSearch(value);
     }
 
     doSearch(value) {
-        this.resetForSearch();
-
-        this.searchControl.predicateString = value;
+        if (value.toLowerCase() !== this.searchControl.predicateString.toLowerCase()) {
+            this.resetForSearch();
+            this.searchControl.predicateString = value;
+        }
 
         this.setState({refreshNeeded:!this.state.refreshNeeded});
     }

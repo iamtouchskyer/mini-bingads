@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 
 class SearchControl extends Component {
     onSearch(event) {
-        this.props.onSearch && this.props.onSearch(event);
+        this.props.onSearch && this.props.onSearch(this.searchValue);
     }
 
     onType(event) {
-        this.props.onType && this.props.onType(event);
+        this.searchValue = event.target.value;
+
+        this.props.onType && this.props.onType(event.target.value);
     }
 
     render() {
