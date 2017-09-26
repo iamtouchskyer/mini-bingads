@@ -254,6 +254,26 @@ button.list-group-item .list-group-item-heading,
     background-color: #EEE !important;
 }
 
+.inline-pager {
+  margin: 0px;
+}
+
+.dropdown-menu > li .inline-pager {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.inline-pager li > a, 
+.inline-pager li > span, {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.inline-pager li > a,
+.pager li > a {
+  color: #008272;
+}
+
 table th > input[type="checkbox"],
 table th > input[type="radio"],
 table tr > input[type="checkbox"],

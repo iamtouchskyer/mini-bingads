@@ -1,28 +1,30 @@
 import React from 'react';
 import WunderbarPanel from './wunderbar-panel.js';
+import SearchField from './components/search.js';
+import Dropdown from './components/dropdown.js';
 
 class Wunderbar extends React.Component {
+    didSearch() {}
     render () {
+        const list = [
+            {name: "touchskyer00 - B0105ULF"}, {name: "touchskyer01 - B010E7GZ"}, {name: "touchskyer02 - G0105ULF"}, {name: "touchskyer03 - E310E7GZ"}, {name: "touchskyer04 - E0105ULF"}, 
+            {name: "touchskyer00 - B0105ULF"}, {name: "touchskyer01 - B010E7GZ"}, {name: "touchskyer02 - G0105ULF"}, {name: "touchskyer03 - E310E7GZ"}, {name: "touchskyer04 - E0105ULF"}, 
+            {name: "touchskyer00 - B0105ULF"}, {name: "touchskyer01 - B010E7GZ"}, {name: "touchskyer02 - G0105ULF"}, {name: "touchskyer03 - E310E7GZ"}, {name: "touchskyer04 - E0105ULF"}, 
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+            {name: "touchskyer05 - D010E7GZ"}, {name: "touchskyer06 - A010E7GZ"}, {name: "touchskyer06 - A010E7GZ"},
+        ];
+
         return (
             <div>
-                <div className="form-group dropdown">
-                    <label className="control-label">Selected Account</label> 
-                    <button className="btn btn-default btn-block" type="button" data-toggle="dropdown">touchskyer00 - B0105ULF<span className="glyphicon glyphicon-chevron-down pull-right"></span></button>
-                    <ul className="dropdown-menu" role="menu">
-                        <li><a href="#" role="menuitem">touchskyer00 - B0105ULF</a></li>
-                        <li><a href="#" role="menuitem">touchskyer01 - B010E7GZ</a></li>
-                    </ul>
-                </div>
+                <Dropdown title="Selected Account" list={list} enableSearch={true} selectedIndex={0} />
 
                 <hr />
 
-                <div className="form-group">
-                    <div className="input-group input-group-sm">
-                        <input type="text" placeholder="Search" className="form-control" />
-                        <div className="input-group-addon"><span className="glyphicon glyphicon-search"></span></div>
-                    </div>
-                </div>
-
+                <SearchField onSearch={this.didSearch.bind(this)}/>
                 <WunderbarPanel />
             </div>
         );
