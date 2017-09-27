@@ -15,8 +15,7 @@
     "react-block-ui": "^1.0.3",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
-    "react-switch-button": "^2.2.2",
-    "underscore": "^1.8.3"
+    "react-switch-button": "^2.2.2"
   },
   "scripts": {
     "start": "export PORT=8888 && react-scripts start",

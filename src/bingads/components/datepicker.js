@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
-import _ from 'underscore';
+import _ from 'lodash';
 import SwitchButton from 'react-switch-button';
 import 'react-switch-button/dist/react-switch-button.css';
 import BootStrapDatePicker from 'bootstrap-datepicker';

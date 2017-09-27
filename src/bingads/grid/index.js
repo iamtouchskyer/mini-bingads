@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
-import _ from 'underscore';
+import _ from 'lodash';
 import { Mapper } from 'js-data';
 import { HttpAdapter } from 'js-data-http';
 import BlockUi from 'react-block-ui';
@@ -23,7 +23,7 @@ class Grid extends Component {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 const responseObj = JSON.parse(xhr.responseText);
 
-                this.titles = _.allKeys(responseObj.value[0]);
+                this.titles = _.keys(responseObj.value[0]);
                 this.rows = _.map(responseObj.value, (item) => {
                     let cols = _.map(_.values(item), (val) => {
                         if (_.isArray(val)) {

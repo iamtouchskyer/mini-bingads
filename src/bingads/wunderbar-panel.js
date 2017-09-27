@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
+import Tree from './components/tree.js';
 
 class WunderbarPanel extends React.Component {
     constructor() {
@@ -8,7 +9,17 @@ class WunderbarPanel extends React.Component {
         this.metaData = [
             {
                 title: "All Campaigns", children: [
-                    {title:'Campaig111', link:'#'},
+                    {title:'Campaig111', link:'#', children: [
+                        {title:'AdGroup #1', children: [
+                                {title:'AdGroup #2', link:'#'},
+                                {title:'AdGroup #3', link:'#'},
+                                {title:'AdGroup #4', link:'#'},
+                            ]},
+                        {title:'AdGroup #2', link:'#'},
+                        {title:'AdGroup #3', link:'#'},
+                        {title:'AdGroup #4', link:'#'},
+                        {title:'AdGroup #5', link:'#'},
+                    ]},
                     {title:'Campaig112n', link:'#'},
                     {title:'Campaig212n', link:'#'},
                     {title:'Campaig232n', link:'#'},
@@ -41,11 +52,15 @@ class WunderbarPanel extends React.Component {
         ];
 
         this.panels = _.map(this.metaData, (item) => {
+
+            let list = <Tree data={item.children} />;
+            /*
             let list = _.map(item.children, (subItem) => {
                 return (
                     <li className="list-group-item"><span className="cursor-pointer" data-toggle="tab" data-target={subItem.link}>{subItem.title}</span></li>
                 );
             });
+            */
 
             return (
                 <div className="panel panel-default">
@@ -68,6 +83,7 @@ class WunderbarPanel extends React.Component {
             <div className="panel-group">
                 {this.panels}
             </div>
+
         );
     }
 

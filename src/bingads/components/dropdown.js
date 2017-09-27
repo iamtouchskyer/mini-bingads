@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import _ from 'underscore';
+import _ from 'lodash';
 import $ from 'jquery';
 import Search from './search.js';
 import Pagination from './pagination.js';

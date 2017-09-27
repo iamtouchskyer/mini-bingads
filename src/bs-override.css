@@ -289,3 +289,34 @@ table tr > input[type="radio"] {
 .container {
   width: 1600px;
 }
+
+
+ul.collapse > li {
+  display: block;
+}
+
+ul.tree {
+  padding: 5px 20px;
+}
+
+ul.tree > li {
+  padding: 2px 0px;
+}
+
+ul.collapse > li:before {
+  /*Using a Bootstrap glyphicon as the bullet point*/
+  content: "\e080";
+  font-family: 'Glyphicons Halflings';
+  font-size: 11px;
+  float: left;
+  margin-top: 2px;
+  margin-left: -15px;
+  color: #008272;
+}
+
+
+ul> li.leaf-node:before,
+ul.collapse > li.leaf-node:before {
+  content: none;
+}
+
