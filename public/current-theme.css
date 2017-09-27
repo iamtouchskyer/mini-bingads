@@ -314,9 +314,7 @@ ul.collapse > li:before {
   color: #008272;
 }
 
-
 ul> li.leaf-node:before,
 ul.collapse > li.leaf-node:before {
   content: none;
 }
-
