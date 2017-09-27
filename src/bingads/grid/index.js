@@ -5,6 +5,7 @@ import { Mapper } from 'js-data';
 import { HttpAdapter } from 'js-data-http';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
+import JayData from 'jaydata';
 
 class Grid extends Component {
     constructor() {
@@ -44,6 +45,14 @@ class Grid extends Component {
             }
         };
         setTimeout(() => {xhr.send()}, 1000);
+
+/*
+        let db = new JayData.EntityContext("https://services.odata.org/V3/Northwind/Northwind.svc/");
+
+        db.onReady((...args) => {
+            console.log(args);
+        });
+        */
     }
 
     componentDidMount() {

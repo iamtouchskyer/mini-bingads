@@ -2,6 +2,18 @@
 # yarn lockfile v1
 
 
+"@types/es6-promise@0.0.32":
+  version "0.0.32"
+  resolved "https://registry.yarnpkg.com/@types/es6-promise/-/es6-promise-0.0.32.tgz#3bcf44fb1e429f3df76188c8c6d874463ba371fd"
+
+"@types/extend@^2.0.30":
+  version "2.0.30"
+  resolved "https://registry.yarnpkg.com/@types/extend/-/extend-2.0.30.tgz#58cc93f621d0a358d3fec9bd6e739bc60ec7e275"
+
+"@types/reflect-metadata@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@types/reflect-metadata/-/reflect-metadata-0.0.5.tgz#9c042bfa9803d577aad4f57dfbca4b7cae4286fe"
+
 abab@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -35,7 +47,7 @@ acorn-jsx@^3.0.0:
   dependencies:
     acorn "^3.0.4"
 
-acorn@^3.0.4:
+acorn@^3.0.4, acorn@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
@@ -293,6 +305,10 @@ async@^2.1.2, async@^2.1.4, async@^2.4.1:
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
+
+atob@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/atob/-/atob-2.0.3.tgz#19c7a760473774468f20b2d2d03372ad7d4cbf5d"
 
 autoprefixer@7.1.2:
   version "7.1.2"
@@ -1221,6 +1237,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
+btoa@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/btoa/-/btoa-1.1.2.tgz#3e40b81663f81d2dd6596a4cb714a8dc16cfabe0"
+
 buffer-indexof@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-indexof/-/buffer-indexof-1.1.1.tgz#52fabcc6a606d1a00302802648ef68f639da268c"
@@ -2053,6 +2073,10 @@ dot-prop@^3.0.0:
   dependencies:
     is-obj "^1.0.0"
 
+dot@^1.0.3:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/dot/-/dot-1.1.2.tgz#c7377019fc4e550798928b2b9afeb66abfa1f2f9"
+
 dotenv@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
@@ -2538,7 +2562,7 @@ express@^4.13.3:
     utils-merge "1.0.0"
     vary "~1.1.1"
 
-extend@~3.0.0, extend@~3.0.1:
+extend@^3.0.0, extend@~3.0.0, extend@~3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
@@ -3639,6 +3663,51 @@ istanbul-reports@^1.1.2:
   dependencies:
     handlebars "^4.0.3"
 
+jaydata-dynamic-metadata@^0.1.17:
+  version "0.1.18"
+  resolved "https://registry.yarnpkg.com/jaydata-dynamic-metadata/-/jaydata-dynamic-metadata-0.1.18.tgz#9ba3703288641c62620f1380c901b1e5f109b606"
+  dependencies:
+    "@types/es6-promise" "0.0.32"
+    "@types/extend" "^2.0.30"
+    "@types/reflect-metadata" "0.0.5"
+    extend "^3.0.0"
+    jaydata-error-handler "^0.0.1"
+    jaydata-odatajs "^4.0.1"
+    jaydata-promise-handler "^0.0.1"
+    odata-v4-metadata "^0.1.3"
+
+jaydata-error-handler@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/jaydata-error-handler/-/jaydata-error-handler-0.0.1.tgz#53927466ca3a49df4b286dc6f39c021e3b31fe60"
+
+jaydata-odatajs@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/jaydata-odatajs/-/jaydata-odatajs-4.0.1.tgz#b67098124ddad87f511237ef58889e494ee1e3a6"
+  dependencies:
+    xmldom "^0.1.19"
+
+jaydata-promise-handler@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/jaydata-promise-handler/-/jaydata-promise-handler-0.0.1.tgz#374eba759671236cc16e928dfb38bab1fcaba157"
+  dependencies:
+    extend "^3.0.0"
+    jaydata-error-handler "^0.0.1"
+
+jaydata@^1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/jaydata/-/jaydata-1.5.10.tgz#6766b6f30cf9eb66a497b133adc780a7a20c8a6c"
+  dependencies:
+    acorn "^3.3.0"
+    atob "^2.0.0"
+    btoa "^1.1.2"
+    dot "^1.0.3"
+    jaydata-dynamic-metadata "^0.1.17"
+    jaydata-error-handler "^0.0.1"
+    jaydata-odatajs "^4.0.1"
+    jaydata-promise-handler "^0.0.1"
+    odata-v4-metadata "^0.1.3"
+    xmldom "^0.1.19"
+
 jest-changed-files@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-20.0.3.tgz#9394d5cc65c438406149bef1bf4d52b68e03e3f8"
@@ -4619,6 +4688,10 @@ object.omit@^2.0.0:
 obuf@^1.0.0, obuf@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.1.tgz#104124b6c602c6796881a042541d36db43a5264e"
+
+odata-v4-metadata@^0.1.3:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/odata-v4-metadata/-/odata-v4-metadata-0.1.5.tgz#e044900de724a35a869f91cf9acbf51f2b28f9c8"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -6833,6 +6906,10 @@ xml-char-classes@^1.0.0:
 xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
+
+xmldom@^0.1.19:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
 xtend@^4.0.0, xtend@^4.0.1:
   version "4.0.1"
