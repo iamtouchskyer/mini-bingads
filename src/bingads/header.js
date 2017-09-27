@@ -1,11 +1,54 @@
 import React from 'react';
 
+class DebugMenu extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            customCss : 'current-theme.css'
+        };
+    }
+
+    switchTheme(event) {
+        switch (event.target.id) {
+            case 'DebugMenuBootStrapTheme':
+                this.setState({customCss:'bootstrap-theme.css'});
+                break;
+
+            case 'DebugMenuCurrentTheme':
+                this.setState({customCss:'current-theme.css'});
+                break;
+
+            case 'DebugMenuNewTheme':
+                this.setState({customCss:'new-theme.css'});
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    render() {
+        return (
+            <div className="navbar-brand dropdown" id="DebugMenu">
+                {this.state.customCss && <link rel="stylesheet" type="text/css" href={this.state.customCss} />}
+                <span className="cursor-pointer" data-toggle="dropdown"> BingAds </span>
+                <ul className="dropdown-menu">
+                    <li><a href="javascript:void(0)" id="DebugMenuBootStrapTheme" onClick={this.switchTheme.bind(this)}>BootStrap Theme</a></li>
+                    <li><a href="javascript:void(0)" id="DebugMenuCurrentTheme" onClick={this.switchTheme.bind(this)}>Current Theme</a></li>
+                    <li><a href="javascript:void(0)" id="DebugMenuNewTheme" onClick={this.switchTheme.bind(this)}>New Theme</a></li>
+                </ul>
+            </div>
+        );
+    }
+};
+
 class Header extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-default">
                 <div className="navbar-header">
-                    <a className="navbar-brand" href="javascript:void(0)"> BingAds </a>
+                    <DebugMenu />
                 </div>
 
                 <ul className="nav navbar-nav">

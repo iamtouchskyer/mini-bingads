@@ -68,7 +68,7 @@ class WunderbarPanel extends React.Component {
                         <span className="cursor-pointer" data-toggle="collapse" data-target={"#" + item.title.replace( /\s/g, "")}>{item.title}</span>
                     </div>
 
-                    <div className="panel-collapse collapse" id={item.title.replace( /\s/g, "")}>
+                    <div className="panel-collapse collapse in" id={item.title.replace( /\s/g, "")}>
                         <ul className="list-group">
                             {list}
                         </ul>

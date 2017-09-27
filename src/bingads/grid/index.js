@@ -25,7 +25,9 @@ class Grid extends Component {
                 const responseObj = JSON.parse(xhr.responseText);
 
                 this.titles = _.keys(responseObj.value[0]);
-                this.rows = _.map(responseObj.value, (item) => {
+
+                const val = _.take(responseObj.value, _.size(responseObj.value)-2);
+                this.rows = _.map(val, (item) => {
                     let cols = _.map(_.values(item), (val) => {
                         if (_.isArray(val)) {
                             return "Array";

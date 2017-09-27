@@ -14,7 +14,7 @@ class BingAds extends React.Component {
                 <Header />
                 
                 <div style={{width: '100%'}}> 
-                    <div style={{float:'left', width: '220px'}}>
+                    <div className="navigation-pane" style={{float:'left', width: '220px'}}>
                         <Wunderbar />
                     </div> 
                     <div style={{float:'right', width: '85%'}}> 

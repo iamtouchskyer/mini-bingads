@@ -29,15 +29,11 @@ fieldset[disabled] .btn-primary.focus,
 .navbar-inverse .navbar-toggle:focus,
 .panel-default > .panel-heading .badge
 {
-  background-color: #008272;
-}
-
-.btn-default {
-  color: #555;
+  background-color: #005B7A;
 }
 
 .navbar-inverse .navbar-toggle {
-  border-color: #008272;
+  border-color: #005B7A;
 } 
 
 .btn-default:active,
@@ -55,7 +51,7 @@ fieldset[disabled] .btn-primary.focus,
 .btn-default:hover,
 .btn-default:focus,
 .btn-default.focus {
-  color: #000;
+  color: #005B7A;
 }
 
 pre,
@@ -66,20 +62,11 @@ pre code,
 .thumbnail .caption,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
-.navbar-default .navbar-brand,
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus,
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus,
-.navbar-default .navbar-link:hover, 
-.navbar-default .btn-link:hover,
-.navbar-default .btn-link:focus,
 a.list-group-item .list-group-item-heading,
 button.list-group-item .list-group-item-heading,
 .panel-default > .panel-heading
 {
-  color: #008272;
+  color: #005B7A;
 }
 
 .btn-primary,
@@ -93,8 +80,8 @@ button.list-group-item .list-group-item-heading,
   cursor:pointer;
 }
 
-.table th {
-    background-color:#E5E5E5;
+.table {
+    background-color:#FFFFFF;
 }
 
 .table th.sortable {
@@ -144,7 +131,7 @@ button.list-group-item .list-group-item-heading,
 }
 
 .nav-tabs > li.active > a {
-    color: #333333;
+    color: #474747;
     background-color: #ffffff;
     border: 1px solid #aaaaaa;
     border-bottom-color: transparent;
@@ -155,6 +142,27 @@ button.list-group-item .list-group-item-heading,
     color: #666666;
     border: 1px solid transparent;
     border-radius: 0px 0px 0 0;
+}
+
+.navbar-default {
+  background-color: #6b6b6b;
+}
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-link:hover, 
+.navbar-default .btn-link:hover,
+.navbar-default .btn-link:focus,
+.navbar-default .navbar-nav > li > a {
+  background-color: #6b6b6b;
+  color: #FFFFFF;
 }
 
 .navbar-nav > .active > a:after, 
@@ -168,7 +176,7 @@ button.list-group-item .list-group-item-heading,
   margin: auto;
   content: ' ';
   width: 90%;
-  background: #008272;
+  background: #FFFFFF;
   height: 3px;
 }
 
@@ -271,7 +279,7 @@ button.list-group-item .list-group-item-heading,
 
 .inline-pager li > a,
 .pager li > a {
-  color: #008272;
+  color: #005B7A;
 }
 
 table th > input[type="checkbox"],
@@ -311,7 +319,7 @@ ul.collapse > li:before {
   float: left;
   margin-top: 2px;
   margin-left: -15px;
-  color: #008272;
+  color: #005B7A;
 }
 
 
@@ -320,3 +328,66 @@ ul.collapse > li.leaf-node:before {
   content: none;
 }
 
+body {
+  background-color: #EEEEEE;
+}
+
+hr {
+  border-color: #474747;
+}
+
+.btn-default {
+  color: #005B7A;
+  background-color: #EEEEEE;
+  border-color: #EEEEEE;
+}
+
+.navigation-pane {
+  background-color: #474747;
+}
+
+.navigation-pane .btn-default {
+  background-color: #474747;
+  border-color: #474747;
+  color: #FFFFFF;
+}
+
+.navigation-pane .input-group,
+.navigation-pane .form-control,
+.navigation-pane .input-group-addon {
+  background-color: #474747;
+  border-color: #474747;
+  color: #FFFFFF;
+}
+
+.dropdown.datepicker-dropdown > button:after,
+.navigation-pane .form-group:after,
+.navigation-pane .form-control:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  content: ' ';
+  width: 100%;
+  background-color: #FFFFFF;
+  height: 2px;
+}
+
+.navigation-pane .btn-default,
+.navigation-pane label { 
+  color: #FFFFFF;
+}
+
+.navigation-pane ul.collapse > li:before {
+  color: #FFFFFF;
+}
+
+.navigation-pane .panel-default,
+.navigation-pane .panel-default > .panel-heading,
+.navigation-pane .panel-default > .panel-content,
+.navigation-pane .panel-default > .panel-footer {
+  background-color: #474747;
+  border-color: #474747;
+  color: #FFFFFF;
+}
