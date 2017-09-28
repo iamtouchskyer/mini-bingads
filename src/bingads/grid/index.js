@@ -1,32 +1,45 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import _ from 'lodash';
-import { Mapper } from 'js-data';
+import { DataStore, Mapper } from 'js-data';
 import { HttpAdapter } from 'js-data-http';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-import JayData from 'jaydata';
+import DropDown from '../components/dropdown.js'
 
 class Grid extends Component {
     constructor() {
         super();
 
         this.state = {
-            blocking: true
+            blocking: true,
         };
 
         this.titles = [];
         this.rows = [];
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'http://services.odata.org/TripPinRESTierService/People', true);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                const responseObj = JSON.parse(xhr.responseText);
+        this.store = new DataStore();
+        this.httpAdapter = new HttpAdapter({
+            // Instead of using relative urls, force absolute
+            // urls using this basePath
+            basePath: 'http://services.odata.org/TripPinRESTierService/',
+        });
+        
+        this.store.registerAdapter('http', this.httpAdapter, { 'default': true });
+        this.store.defineMapper('people', { endpoint: 'People' });
+        this.store.defineMapper('airline', { endpoint: 'Airlines' });
+        this.store.defineMapper('airport', { endpoint: 'Airports' });
+        this.store.defineMapper('newpeople', { endpoint: 'NewComePeople' });
 
-                this.titles = _.keys(responseObj.value[0]);
+        this.doFetch('people');
+    }
 
-                const val = _.take(responseObj.value, _.size(responseObj.value)-2);
+    doFetch(key) {
+        this.store.findAll(key)
+            .then((peoples) => {
+                this.titles = _.keys(peoples.value[0]);
+
+                const val = _.take(peoples.value, _.size(peoples.value)-2);
                 this.rows = _.map(val, (item) => {
                     let cols = _.map(_.values(item), (val) => {
                         if (_.isArray(val)) {
@@ -44,17 +57,11 @@ class Grid extends Component {
                 });
 
                 this.setState({blocking: false});
-            }
-        };
-        setTimeout(() => {xhr.send()}, 1000);
+            });     
+    }
 
-/*
-        let db = new JayData.EntityContext("https://services.odata.org/V3/Northwind/Northwind.svc/");
-
-        db.onReady((...args) => {
-            console.log(args);
-        });
-        */
+    dropdownDidClick(event) {
+        this.doFetch(event.target.text);
     }
 
     componentDidMount() {
@@ -67,7 +74,8 @@ class Grid extends Component {
 
     render() {
         return (
-            <div >
+            <div>
+                <span><DropDown enableSearch={false} list={[{name:'people'}, {name:'airline'}, {name:'airport'}, {name:'newpeople'}]} onClick={this.dropdownDidClick.bind(this)}/></span>
                 <BlockUi tag="div" blocking={this.state.blocking}>
                     <table className="table table-bordered table-hover">
                         <thead>
@@ -94,44 +102,3 @@ class Grid extends Component {
 }
 
 export default Grid;
-
-/*
-
-                <table className="table table-bordered table-hover">
-                    <thead> 
-                        <tr>
-                        <th><input type="checkbox"/></th>
-                        <th>Status</th>
-                        <th>Campaign</th>
-                        <th>Budget</th>
-                        <th>Delivery</th>
-                        <th>Campaign Type</th>
-                        <th>Big strategy type</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr><td><input type="checkbox"/></td> <td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 1</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 2</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 3</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 4</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 6</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 1</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 2</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 3</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 4</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 6</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 1</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 2</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 3</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 4</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 6</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 1</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 2</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 3</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 4</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                        <tr><td><input type="checkbox"/></td><td><span className="glyphicon glyphicon-ok"></span></td><td>Campaign 6</td><td>519.08/day</td><td>Eligible</td><td>Search & content</td><td>Manual</td></tr> 
-                    </tbody>
-                </table>
-
-*/

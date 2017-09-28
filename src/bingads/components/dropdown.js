@@ -29,18 +29,20 @@ class Dropdown extends Component {
             predicateString: '',
             timer: null,
         };
+
+        this.id = _.uniqueId("SearchPaginationDropdown");
     }
 
     componentDidMount() {
         // Remove data-toggle="dropdown" and handle by ourself
         $('body').on('click', function (e) {
-            if (!$('#SearchPaginationDropdown').is(e.target) 
-                && $('#SearchPaginationDropdown').has(e.target).length === 0 
+            if (!$("#"+this.id).is(e.target) 
+                && $("#"+this.id).has(e.target).length === 0 
                 && $('.open').has(e.target).length === 0
             ) {
-                $('#SearchPaginationDropdown').removeClass('open');
+                $("#"+this.id).removeClass('open');
             }
-        });
+        }.bind(this));
     }
 
     generateList() {
@@ -68,11 +70,15 @@ class Dropdown extends Component {
     }
 
     onButtonClick(event) {
-        $('#SearchPaginationDropdown').toggleClass('open');
+        $("#"+this.id).toggleClass('open');
     }
 
     onMenuItemSelect(event) {
-        $('#SearchPaginationDropdown').removeClass('open');
+        $("#"+this.id).removeClass('open');
+
+        if (this.props.onClick) {
+            this.props.onClick(event);
+        }
     }
 
     onPaginationClickPrevious(event) {
@@ -120,7 +126,7 @@ class Dropdown extends Component {
         this.finalList = this.generateList();
 
         return (
-            <div className="form-group dropdown" id="SearchPaginationDropdown">
+            <div className="form-group dropdown" id={this.id}>
                 <label className="control-label">{this.config.title}</label>
                 <button className="btn btn-default btn-block" type="button" onClick={this.onButtonClick.bind(this)}>{this.config.list[this.config.selectedIndex].name}<span className="glyphicon glyphicon-chevron-down pull-right"></span></button>
                 <ul className="dropdown-menu" role="menu">
