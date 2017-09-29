@@ -19,8 +19,8 @@ class Pagination extends Component {
     render() {
         return (
             <ul className="pager inline-pager">
-                <li className={classNames('previous', this.props.disablePrevious && 'disabled', 'previous')}><a href="#" id="PaginationPrevious" tabindex={0} onClick={this.clickPrevious.bind(this)} >Previous</a></li>
-                <li className={classNames(this.props.disableNext && 'disabled', 'next')}><a href="#" id="PaginationNext" tabindex={0} onClick={this.clickNext.bind(this)} >Next</a></li>
+                <li className={classNames('previous', this.props.disablePrevious && 'disabled', 'previous')}><a href="#" id="PaginationPrevious" tabIndex={0} onClick={this.clickPrevious.bind(this)} >Previous</a></li>
+                <li className={classNames(this.props.disableNext && 'disabled', 'next')}><a href="#" id="PaginationNext" tabIndex={0} onClick={this.clickNext.bind(this)} >Next</a></li>
             </ul>
         );
     }

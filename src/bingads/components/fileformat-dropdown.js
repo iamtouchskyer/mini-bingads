@@ -14,7 +14,7 @@ class FileFormatDropdown extends Component {
         ];
 
         this.fileTypeElement = _.map(this.fileTypes, (item) => {
-            return (<li><a href="javascript:void(0)">{item.title}</a></li>);
+            return (<li key={JSON.stringify(item)}><a href="javascript:void(0)">{item.title}</a></li>);
         });
 
         this.state = {fileType: (this.props && this.props.fileType) ? this.props.fileType : this.fileTypes[0].title};

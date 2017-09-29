@@ -50,7 +50,7 @@ class AlertGroup extends React.Component {
                                     );
                                 }
                                 return (
-                                    <div className={"alert " + item.className}>
+                                    <div className={"alert " + item.className} key={item.priority}>
                                         <span className={"glyphicon " + item.iconClassname}></span>
                                         {item.msg}
                                         {closeBtnElement}

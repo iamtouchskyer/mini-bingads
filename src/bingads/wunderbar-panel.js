@@ -63,7 +63,7 @@ class WunderbarPanel extends React.Component {
             */
 
             return (
-                <div className="panel panel-default">
+                <div className="panel panel-default" key={JSON.stringify(item)}>
                     <div className="panel-heading">
                         <span className="cursor-pointer" data-toggle="collapse" data-target={"#" + item.title.replace( /\s/g, "")}>{item.title}</span>
                     </div>

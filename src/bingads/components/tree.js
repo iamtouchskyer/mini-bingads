@@ -30,14 +30,14 @@ class Tree extends Component {
     buildTree(treeNode, uniqueId) {
         const childrenTree = 
              _.map(treeNode.children, (childNode) => {
+                    const id = _.uniqueId('treenode_');
                     if (childNode.children) {
-                        const id = _.uniqueId('treenode_');
-                        return (<li>
+                        return (<li key={id}>
                                     <span className="curosr-pointer" tabIndex={0} role="button" data-toggle="collapse" data-target={"#" + id}>{childNode.title}</span>
                                     {this.buildTree(childNode, id)}
                                 </li>);
                     } else {
-                        return (<li className="leaf-node"><span className="cursor-pointer" tabIndex={0} role="button" onClick={this.onChildNodeClicked.bind(this)}>{childNode.title}</span></li>); 
+                        return (<li className="leaf-node" key={id}><span className="cursor-pointer" tabIndex={0} role="button" onClick={this.onChildNodeClicked.bind(this)}>{childNode.title}</span></li>); 
                     }
                 });
 

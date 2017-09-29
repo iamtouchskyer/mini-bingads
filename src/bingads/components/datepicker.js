@@ -175,7 +175,7 @@ class DatePicker extends Component {
             const additionalClass = this.state.checkedIndex === index ? "glyphicon-ok" : "";
 
             return (
-                <li role="menuitem">
+                <li role="menuitem" key={JSON.stringify(item)}>
                     <a href="javascript:void(0)" id={DatePicker.menuIdPrefix() + index++}>
                         <span className={"glyphicon " + additionalClass}></span>
                         {item.title}
@@ -199,12 +199,12 @@ class DatePicker extends Component {
                 <ul className="dropdown-menu" style={{width:"100%"}}>
                     {this.dateMenu}
                     <li className="divider"></li>
-            <li className="fake-a">
-                {!this.state.popToggleState && (<button type="button" className="btn btn-primary btn-sm">Apply</button>)}
-                <span className="pull-right">
-                    <SwitchButton label="COMPARE" labelRight={this.state.popToggleState ? "On" : "Off"} defaultChecked={false} onChange={this.popToggleDidChange.bind(this)}/>
-                </span>
-            </li>
+                    <li className="fake-a">
+                        {!this.state.popToggleState && (<button type="button" className="btn btn-primary btn-sm">Apply</button>)}
+                        <span className="pull-right">
+                            <SwitchButton label="COMPARE" labelRight={this.state.popToggleState ? "On" : "Off"} defaultChecked={false} onChange={this.popToggleDidChange.bind(this)}/>
+                        </span>
+                    </li>
                     {this.state.popToggleState && this.popMenu}
                     {this.state.popToggleState && (<li className="fake-a"> <button type="button" className="btn btn-primary btn-sm">Apply</button> </li>)}
                 </ul>

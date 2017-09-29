@@ -16,14 +16,14 @@ class Dropdown extends Component {
             list: this.props.list,
             selectedIndex: this.props.slectedIndex ? this.props.selectedIndex : 0,
             itemPerPage: this.props.itemPerPage ? this.props.itemPerpage : 10,
-        }
+        };
 
         this.paginationControl = {
             enablePagination: false,
             currentPage: 0,
             disablePrevious: false,
             disableNext: false,
-        }
+        };
 
         this.searchControl = {
             predicateString: '',
@@ -63,7 +63,7 @@ class Dropdown extends Component {
         let list = [];
         for (let i=start; i<end; i++) {
             const item = finalList[i];
-            list.push((<li><a href="#" role="menuitem" id={"menuitem" + i} onClick={this.onMenuItemSelect.bind(this)}>{item.name}</a></li>));
+            list.push((<li key={"menuitem" + i}><a href="#" role="menuitem"  id={"menuitem" + i} onClick={this.onMenuItemSelect.bind(this)}>{item.name}</a></li>));
         }
 
         return list;

@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from './header.js';
 import Wunderbar from './wunderbar.js';
-import AlertGroup from './alert-group.js';
 import CampaignNavBar from './campaign-nav-bar.js';
 import Toolbar from './toolbar/index.js';
 import Grid from './grid/index.js';
+import AlertGroup from './components/alert-group.js';
 import DatePicker from './components/datepicker.js';
 
 class BingAds extends React.Component {

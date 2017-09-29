@@ -15,10 +15,10 @@ class SegmentDropdown extends Component {
 
     generateSegmentMenuItem(item) {
         if (_.isUndefined(item.children)) {
-            return (<li><a href="javascript:void(0)" id={'Segment' + item.id}>{item.title}</a></li>);
+            return (<li key={JSON.stringify(item)}><a href="javascript:void(0)" id={'Segment' + item.id}>{item.title}</a></li>);
         } else {
             return (
-                <li className="dropdown-submenu">
+                <li className="dropdown-submenu"  key={JSON.stringify(item)}>
                         <a href="javascript:void(0)" id={'Segment + item.id'} className="sub-dropdown-menu" data-toggle="dropdown">{item.title}
                             <span className="caret caret-right pull-right"></span>
                         </a>
