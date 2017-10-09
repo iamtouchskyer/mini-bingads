@@ -47,7 +47,7 @@ class BingAds extends Component {
 
         this.entryName = _.map(_.keys(this.entries), (entryKey) => {return {name: entryKey}});
 
-        this.entryView = <Dropdown enableSearch={true} selectedIndex={0} list={this.entryName} onClick={this.entryDidChange.bind(this)} />;
+        this.entryView = <Dropdown selectedIndex={0} list={this.entryName} onClick={this.entryDidChange.bind(this)} />;
     }
 
     render() {
