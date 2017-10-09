@@ -8,28 +8,44 @@ class InputField extends Component {
 
         this.state = {
             inputValue: '',
-            errorStr: '',
+            validationResult: null,
         };
     }
 
     validate() {
+        let validationResult = 'Success';
         if (this.state.inputValue === '') {
-            this.setState({
-                errorStr: 'Empty Field'
-            });
+            validationResult = 'Fail';
         } else {
             if (this.props.integerOnly) {
-                ;
+                if (this.state.inputValue.search(/^[a-zA-Z]*$/) >= 0) {
+                    validationResult = 'Fail';
+                }
             }
         }
+
+        this.setState({validationResult: validationResult});
+    }
+
+    isValid() {
+        this.validate();
+
+        return this.state.validationResult === 'Success';
     }
 
     onBlur() {
         this.validate();
     }
+    
+    onFocus() {
+        this.setState({validationResult: null});
+    }
 
     clearInput() {
-        this.setState({inputValue: ''});
+        this.setState({
+            inputValue: '',
+            validationResult: null
+        });
     }
 
     updateInputValue(evt) {
@@ -39,9 +55,12 @@ class InputField extends Component {
     }
 
     render() {
+        const errorClass = this.state.validationResult ? (this.state.validationResult === 'Success' ? 'has-success' : 'has-error') : '';
+        const errorIcon = this.state.validationResult ? (this.state.validationResult === 'Success' ? 'glyphicon-ok-sign ' : 'glyphicon-warning-sign') : '';
+
         return (
-            <div className={classNames('has-feedback', 'input-group', this.state.errorStr && 'has-error')} >
-                <span className="glyphicon glyphicon-remove input-group-addon mouse-pointer" tabIndex={0} role="button"></span>
+            <div className={classNames('has-feedback', 'input-group', errorClass)}>
+                <span className="glyphicon glyphicon-remove input-group-addon mouse-pointer" tabIndex={0} role="button" onClick={this.clearInput.bind(this)}></span>
                 <input 
                     type="text" 
                     size={64} 
@@ -51,8 +70,9 @@ class InputField extends Component {
                     value={this.state.inputValue} 
                     onChange={this.updateInputValue.bind(this)}
                     onBlur={this.onBlur.bind(this)}
+                    onFocus={this.onFocus.bind(this)}
                 />
-                {this.state.errorStr && (<span className="glyphicon glyphicon-warning-sign form-control-feedback"></span>)}
+                <span className={classNames('glyphicon', 'form-control-feedback', errorIcon)}></span>
             </div>
         );
     }

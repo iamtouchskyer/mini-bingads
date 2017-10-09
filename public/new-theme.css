@@ -391,3 +391,30 @@ hr {
   border-color: #474747;
   color: #FFFFFF;
 }
+
+.dropdown > button {
+    min-width: 80px;
+}
+
+.dropdown .caret {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dropdown .caret.caret-left, 
+.dropdown .caret.caret-right {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.filter-item > .form-group {
+    min-width: 160px;
+}
+
+.filter .form-group:not(:first-child) {
+    margin-left: 10px;
+}
+
+.filter .form-inline:not(:last-child) {
+    margin-bottom: 10px;
+}

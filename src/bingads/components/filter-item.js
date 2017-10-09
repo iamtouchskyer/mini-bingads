@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import InputField from './input-field.js';
+import Checkboxes from './checkbox-group.js';
 import Dropdown from './dropdown.js';
 
 function deepFind(object, key) {
@@ -36,20 +37,35 @@ class FilterItem extends Component {
 
         this.state = ({
             operationDropdown: null,
-            inputField: null
+            inputField: null,
         });
-
-        this.inputField = (
-            <InputField onChange={this.handleChange.bind(this)}/> 
-        );
     }
-    handleChange() {}
 
     onFilterItemChanged(item) {
+        const res = deepFind(this.filters, item.name);
+        if (res) {
+            this.setState({
+                operationDropdown: res.dropdown
+            });
 
-        this.setState({
-            operationDropdown: deepFind(this.filters, item.name).dropdown
-        })
+            if (res.type === 'enum' && res.options) {
+                this.setState({
+                    inputField: <Checkboxes options={res.options} />
+                });
+            } else {
+                this.setState({
+                    inputField: <InputField integerOnly={res.type === 'Decimal'}/>
+                });
+            }
+        }
+    }
+
+    isValid() {
+        if (!this.state.inputField) {
+            return true;
+        } else {
+            return this.state.inputField.isValid();
+        }
     }
 
     onOperationItemChanged(item) {
@@ -67,7 +83,7 @@ class FilterItem extends Component {
                     {this.state.operationDropdown && (<Dropdown sameWidthAsParent={true} list={this.state.operationDropdown} />)}
                 </div> 
                 <div className="form-group"> 
-                    {this.state.operationDropdown && this.inputField}
+                    {this.state.operationDropdown && this.state.inputField}
                 </div>
             </div>
         );

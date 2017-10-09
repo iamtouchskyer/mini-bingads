@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import $ from 'jquery';
+import classNames from 'classnames';
 import Search from './search.js';
 import Pagination from './pagination.js';
 
@@ -8,14 +9,22 @@ class Dropdown extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {refreshNeeded: false};
+        this.state = {
+            show1stLevelDropdown: false,
+            showSubMenu: {},
+            refreshNeeded: false,
+            title: this.props.list[0].name,
+        };
 
         this.config = {
             title: this.props.title,
             enableSearch: this.props.enableSearch,
-            list: this.props.list,
+            list: _.map(this.props.list, (listItem) => {
+                listItem['DropdownItemId'] = _.uniqueId('DropdownItem');
+                return listItem;
+            }),
             selectedIndex: this.props.slectedIndex ? this.props.selectedIndex : 0,
-            itemPerPage: this.props.itemPerPage ? this.props.itemPerpage : 10,
+            itemPerPage: this.props.itemPerPage ? this.props.itemPerPage : 10,
         };
 
         this.paginationControl = {
@@ -40,7 +49,9 @@ class Dropdown extends Component {
                 && $("#"+this.id).has(e.target).length === 0 
                 && $('.open').has(e.target).length === 0
             ) {
-                $("#"+this.id).removeClass('open');
+                this.setState({
+                    show1stLevelDropdown: false
+                });
             }
         }.bind(this));
     }
@@ -63,22 +74,65 @@ class Dropdown extends Component {
         let list = [];
         for (let i=start; i<end; i++) {
             const item = finalList[i];
-            list.push((<li key={"menuitem" + i}><a href="#" role="menuitem"  id={"menuitem" + i} onClick={this.onMenuItemSelect.bind(this)}>{item.name}</a></li>));
+            list.push(this.generateMenuItem(item));
         }
 
         return list;
     }
 
-    onButtonClick(event) {
-        $("#"+this.id).toggleClass('open');
+    generateMenuItem(item) {
+        if (_.isUndefined(item.children)) {
+            return (<li key={item.id}><a href="javascript:void(0)" role='menuitem' onClick={_.bind(this.onNonSubMenuItemSelect, this, item)}>{item.name}</a></li>);
+        } else {
+            return (
+                <li className="dropdown-submenu" key={item.DropdownItemId}>
+                    <a href="javascript:void(0)" 
+                        className="sub-dropdown-menu" 
+                        data-toggle="dropdown" 
+                        onClick={_.bind(this.onSubMenuItemSelect, this, item)}
+                    >
+                        {item.name}
+                        <span className="caret caret-right pull-right"></span>
+                    </a>
+                    <ul className={classNames('dropdown-menu', this.state.showSubMenu[item.DropdownItemId] && 'open')}> 
+                        {_.map(item.children, this.generateMenuItem.bind(this))}
+                    </ul>
+                </li>
+            );
+        }
     }
 
-    onMenuItemSelect(event) {
-        $("#"+this.id).removeClass('open');
+    onButtonClick(event) {
+        this.setState({
+            show1stLevelDropdown: !this.state.show1stLevelDropdown
+        });
+    }
+
+    onNonSubMenuItemSelect(item, event) {
+        this.setState({
+            show1stLevelDropdown: false
+        });
+
+        if (!this.props.fixedTitle) {
+            this.setState({title: item.name});
+        }
 
         if (this.props.onClick) {
-            this.props.onClick(event);
+            this.props.onClick(item);
         }
+    }
+
+    onSubMenuItemSelect(item, event) {
+        let subMenu = this.state.showSubMenu;
+        if (_.isUndefined(subMenu[item.DropdownItemId])) {
+            subMenu[item.DropdownItemId] = true;
+        } else {
+            subMenu[item.DropdownItemId] = !subMenu[item.DropdownItemId];
+        }
+
+        this.setState({
+            showSubMenu: subMenu
+        });
     }
 
     onPaginationClickPrevious(event) {
@@ -126,11 +180,13 @@ class Dropdown extends Component {
         this.finalList = this.generateList();
 
         return (
-            <div className="form-group dropdown" id={this.id}>
-                <label className="control-label">{this.config.title}</label>
-                <button className="btn btn-default btn-block" type="button" onClick={this.onButtonClick.bind(this)}>{this.config.list[this.config.selectedIndex].name}<span className="glyphicon glyphicon-chevron-down pull-right"></span></button>
+            <div className={classNames('dropdown', this.state.show1stLevelDropdown && 'open')} id={this.id}>
+                <button className={classNames('btn', 'btn-default', this.props.sameWidthAsParent && 'btn-block')} type="button" onClick={this.onButtonClick.bind(this)}>
+                    {this.props.fixedTitle ? this.props.title : this.state.title}
+                    <span className="caret pull-right"></span>
+                </button>
                 <ul className="dropdown-menu" role="menu">
-                    {this.config.enableSearch && (<li><Search onSearch={this.onSearch.bind(this)} onType={this.onType.bind(this)}/ ></li>)}
+                    {this.config.enableSearch && (<li><Search onSearch={this.onSearch.bind(this)} onType={this.onType.bind(this)} /></li>)}
                     {this.finalList}
                     {this.paginationControl.enablePagination && 
                         (<li><Pagination 

@@ -20,6 +20,7 @@ class Wunderbar extends React.Component {
 
         return (
             <div>
+                <label>Selected Account</label>
                 <Dropdown title="Selected Account" list={list} enableSearch={true} selectedIndex={0} />
 
                 <hr />

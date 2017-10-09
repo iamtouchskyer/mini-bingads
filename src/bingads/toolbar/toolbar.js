@@ -4,8 +4,10 @@ import ToolbarItemBulkEdit from './toolbar-items/toolbar-item-bulk-edit.js';
 import ToolbarItemDetails from './toolbar-items/toolbar-item-details.js';
 import ToolbarItemAutomate from './toolbar-items/toolbar-item-automate.js';
 import ToolbarItemInlineDownload from './toolbar-items/toolbar-item-inline-download.js';
+import ToolbarItemFilter from './toolbar-items/toolbar-item-filter.js';
 import ToolbarInlineViewChangeBudget from './toolbar-inline-views/toolbar-inline-view-change-budget.js';
 import ToolbarInlineViewInlineDownload from './toolbar-inline-views/toolbar-inline-view-inline-download.js';
+import ToolbarInlineViewFilter from './toolbar-inline-views/toolbar-inline-view-filter.js';
 import SegmentDropdown from '../components/segment-dropdown.js';
 
 class BingAdsToolbar extends Component {
@@ -20,6 +22,7 @@ class BingAdsToolbar extends Component {
                     <ToolbarItemDetails callback={this.handleToolbarItemClick.bind(this)}/>
                     <ToolbarItemAutomate callback={this.handleToolbarItemClick.bind(this)}/>
                     <ToolbarItemInlineDownload callback={this.handleToolbarItemClick.bind(this)}/>
+                    <ToolbarItemFilter callback={this.handleToolbarItemClick.bind(this)}/>
                 </div>
                 
                 <div className="btn-group btn-group-secondary">
@@ -37,9 +40,11 @@ class BingAdsToolbar extends Component {
             case 'ChangeBudgetCancel':
             case 'InlineDownloadDownload':
             case 'InlineDownloadCancel':
+            case 'FilterDidApply':
+            case 'FilterDidCancel':
                 this.setState({renderringElement:this.toolbarElement});
                 break;
-            
+
             default:
                 break;
         }
@@ -59,6 +64,10 @@ class BingAdsToolbar extends Component {
             case 'InlineDownload':
                 this.setState({renderringElement:<ToolbarInlineViewInlineDownload callBack={this.handleInlineViewClick.bind(this)}/>});
                 break;
+            
+            case 'CreateFilter':
+                this.setState({renderringElement:<ToolbarInlineViewFilter metaData={this.props.metaData} entry={this.props.entry} callBack={this.handleInlineViewClick.bind(this)}/>});
+            break;
 
             default:
                 break;

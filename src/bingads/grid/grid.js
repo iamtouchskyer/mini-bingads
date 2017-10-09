@@ -3,15 +3,13 @@ import $ from 'jquery';
 import _ from 'lodash';
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
-import DropDown from '../components/dropdown.js';
 
 import { DataStore, Mapper } from 'js-data';
 import { HttpAdapter } from 'js-data-http';
-import xml2json from 'fast-xml-parser';
 
 class Grid extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             blocking: true,
@@ -25,18 +23,22 @@ class Grid extends Component {
         this.httpAdapter = new HttpAdapter({
             // Instead of using relative urls, force absolute
             // urls using this basePath
-            basePath: 'http://services.odata.org/TripPinRESTierService/',
+            basePath: props.metaData.oDataServiceHost
         });
         
         this.store.registerAdapter('http', this.httpAdapter, { 'default': true });
-        this.store.defineMapper('people', { endpoint: 'People' });
-        this.store.defineMapper('airline', { endpoint: 'Airlines' });
-        this.store.defineMapper('airport', { endpoint: 'Airports' });
-        this.store.defineMapper('newpeople', { endpoint: 'NewComePeople' });
+
+        _.each(props.entries, (entryVal, entryKey) => {
+            this.store.defineMapper(entryKey, { endpoint: entryKey });
+        }, this);
     }
 
     componentWillMount() {
-        this.doFetch('people');
+        this.doFetch(this.props.entry);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.doFetch(nextProps.entry);
     }
 
     doFetch(key) {
@@ -70,24 +72,10 @@ class Grid extends Component {
             });     
     }
 
-    dropdownDidClick(event) {
-        this.doFetch(event.target.value);
-    }
 
     render() {
         return (
             <div>
-                <div className="form-group list-group">
-                    <label className="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="people" onClick={this.dropdownDidClick.bind(this)}/> people
-                    </label>
-                    <label className="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="airport" onClick={this.dropdownDidClick.bind(this)}/> airport
-                    </label>
-                    <label className="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="airline" onClick={this.dropdownDidClick.bind(this)}/> airline
-                    </label>
-                </div>
                 <BlockUi tag="div" blocking={this.state.blocking}>
                     <table className="table table-bordered table-hover">
                         <thead>
@@ -118,6 +106,8 @@ export default Grid;
 
 /*
 
+import $data from 'jaydata';
+import xml2json from 'fast-xml-parser';
 import * as JayData from 'jaydata';
 import * as JayDataDynamicMetaData from 'jaydata-dynamic-metadata';
 

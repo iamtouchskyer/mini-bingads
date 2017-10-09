@@ -1,10 +1,14 @@
-import _ from 'lodash';
+(function(mod) {
+    if (typeof exports == "object" && typeof module == "object") return mod(exports, require("jaydata/core")); // CommonJS
+    if (typeof define == "function" && define.amd) return define(["exports", "jaydata/core"], mod); // AMD
+    mod($data.generatedContext || ($data.generatedContext = {}), $data); // Plain browser env
+})(function(exports, $data) {
 
-export default function() {
-    var exports = {};
+    exports.$data = $data;
+
     var types = {};
 
-    types["NorthwindModel.Category"] = {
+    types["NorthwindModel.Category"] = $data("$data.Entity").extend("NorthwindModel.Category", {
         CategoryID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -30,9 +34,9 @@ export default function() {
             "elementType": "NorthwindModel.Product",
             "inverseProperty": "Category"
         }
-    };
+    });
 
-    types["NorthwindModel.CustomerDemographic"] = {
+    types["NorthwindModel.CustomerDemographic"] = $data("$data.Entity").extend("NorthwindModel.CustomerDemographic", {
         CustomerTypeID: {
             "type": "Edm.String",
             "nullable": false,
@@ -49,9 +53,9 @@ export default function() {
             "elementType": "NorthwindModel.Customer",
             "inverseProperty": "CustomerDemographics"
         }
-    };
+    });
 
-    types["NorthwindModel.Customer"] = {
+    types["NorthwindModel.Customer"] = $data("$data.Entity").extend("NorthwindModel.Customer", {
         CustomerID: {
             "type": "Edm.String",
             "nullable": false,
@@ -111,9 +115,9 @@ export default function() {
             "elementType": "NorthwindModel.CustomerDemographic",
             "inverseProperty": "Customers"
         }
-    };
+    });
 
-    types["NorthwindModel.Employee"] = {
+    types["NorthwindModel.Employee"] = $data("$data.Entity").extend("NorthwindModel.Employee", {
         EmployeeID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -208,9 +212,9 @@ export default function() {
             "elementType": "NorthwindModel.Territory",
             "inverseProperty": "Employees"
         }
-    };
+    });
 
-    types["NorthwindModel.Order_Detail"] = {
+    types["NorthwindModel.Order_Detail"] = $data("$data.Entity").extend("NorthwindModel.Order_Detail", {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -250,9 +254,9 @@ export default function() {
             "required": true,
             "inverseProperty": "Order_Details"
         }
-    };
+    });
 
-    types["NorthwindModel.Order"] = {
+    types["NorthwindModel.Order"] = $data("$data.Entity").extend("NorthwindModel.Order", {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -322,9 +326,9 @@ export default function() {
             "type": "NorthwindModel.Shipper",
             "inverseProperty": "Orders"
         }
-    };
+    });
 
-    types["NorthwindModel.Product"] = {
+    types["NorthwindModel.Product"] = $data("$data.Entity").extend("NorthwindModel.Product", {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -377,9 +381,9 @@ export default function() {
             "type": "NorthwindModel.Supplier",
             "inverseProperty": "Products"
         }
-    };
+    });
 
-    types["NorthwindModel.Region"] = {
+    types["NorthwindModel.Region"] = $data("$data.Entity").extend("NorthwindModel.Region", {
         RegionID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -397,9 +401,9 @@ export default function() {
             "elementType": "NorthwindModel.Territory",
             "inverseProperty": "Region"
         }
-    };
+    });
 
-    types["NorthwindModel.Shipper"] = {
+    types["NorthwindModel.Shipper"] = $data("$data.Entity").extend("NorthwindModel.Shipper", {
         ShipperID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -421,9 +425,9 @@ export default function() {
             "elementType": "NorthwindModel.Order",
             "inverseProperty": "Shipper"
         }
-    };
+    });
 
-    types["NorthwindModel.Supplier"] = {
+    types["NorthwindModel.Supplier"] = $data("$data.Entity").extend("NorthwindModel.Supplier", {
         SupplierID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -481,9 +485,9 @@ export default function() {
             "elementType": "NorthwindModel.Product",
             "inverseProperty": "Supplier"
         }
-    };
+    });
 
-    types["NorthwindModel.Territory"] = {
+    types["NorthwindModel.Territory"] = $data("$data.Entity").extend("NorthwindModel.Territory", {
         TerritoryID: {
             "type": "Edm.String",
             "nullable": false,
@@ -513,9 +517,9 @@ export default function() {
             "elementType": "NorthwindModel.Employee",
             "inverseProperty": "Territories"
         }
-    };
+    });
 
-    types["NorthwindModel.Alphabetical_list_of_product"] = {
+    types["NorthwindModel.Alphabetical_list_of_product"] = $data("$data.Entity").extend("NorthwindModel.Alphabetical_list_of_product", {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -564,9 +568,9 @@ export default function() {
             "maxLength": 15,
             "key": true
         }
-    };
+    });
 
-    types["NorthwindModel.Category_Sales_for_1997"] = {
+    types["NorthwindModel.Category_Sales_for_1997"] = $data("$data.Entity").extend("NorthwindModel.Category_Sales_for_1997", {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -577,9 +581,9 @@ export default function() {
         CategorySales: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Current_Product_List"] = {
+    types["NorthwindModel.Current_Product_List"] = $data("$data.Entity").extend("NorthwindModel.Current_Product_List", {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -593,9 +597,9 @@ export default function() {
             "maxLength": 40,
             "key": true
         }
-    };
+    });
 
-    types["NorthwindModel.Customer_and_Suppliers_by_City"] = {
+    types["NorthwindModel.Customer_and_Suppliers_by_City"] = $data("$data.Entity").extend("NorthwindModel.Customer_and_Suppliers_by_City", {
         City: {
             "type": "Edm.String",
             "maxLength": 15
@@ -618,9 +622,9 @@ export default function() {
             "maxLength": 9,
             "key": true
         }
-    };
+    });
 
-    types["NorthwindModel.Invoice"] = {
+    types["NorthwindModel.Invoice"] = $data("$data.Entity").extend("NorthwindModel.Invoice", {
         ShipName: {
             "type": "Edm.String",
             "maxLength": 40
@@ -742,9 +746,9 @@ export default function() {
         Freight: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Order_Details_Extended"] = {
+    types["NorthwindModel.Order_Details_Extended"] = $data("$data.Entity").extend("NorthwindModel.Order_Details_Extended", {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -785,9 +789,9 @@ export default function() {
         ExtendedPrice: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Order_Subtotal"] = {
+    types["NorthwindModel.Order_Subtotal"] = $data("$data.Entity").extend("NorthwindModel.Order_Subtotal", {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -797,9 +801,9 @@ export default function() {
         Subtotal: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Orders_Qry"] = {
+    types["NorthwindModel.Orders_Qry"] = $data("$data.Entity").extend("NorthwindModel.Orders_Qry", {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -879,9 +883,9 @@ export default function() {
             "type": "Edm.String",
             "maxLength": 15
         }
-    };
+    });
 
-    types["NorthwindModel.Product_Sales_for_1997"] = {
+    types["NorthwindModel.Product_Sales_for_1997"] = $data("$data.Entity").extend("NorthwindModel.Product_Sales_for_1997", {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -899,9 +903,9 @@ export default function() {
         ProductSales: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Products_Above_Average_Price"] = {
+    types["NorthwindModel.Products_Above_Average_Price"] = $data("$data.Entity").extend("NorthwindModel.Products_Above_Average_Price", {
         ProductName: {
             "type": "Edm.String",
             "nullable": false,
@@ -912,9 +916,9 @@ export default function() {
         UnitPrice: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Products_by_Category"] = {
+    types["NorthwindModel.Products_by_Category"] = $data("$data.Entity").extend("NorthwindModel.Products_by_Category", {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -942,9 +946,9 @@ export default function() {
             "required": true,
             "key": true
         }
-    };
+    });
 
-    types["NorthwindModel.Sales_by_Category"] = {
+    types["NorthwindModel.Sales_by_Category"] = $data("$data.Entity").extend("NorthwindModel.Sales_by_Category", {
         CategoryID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -968,9 +972,9 @@ export default function() {
         ProductSales: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Sales_Totals_by_Amount"] = {
+    types["NorthwindModel.Sales_Totals_by_Amount"] = $data("$data.Entity").extend("NorthwindModel.Sales_Totals_by_Amount", {
         SaleAmount: {
             "type": "Edm.Decimal"
         },
@@ -990,9 +994,9 @@ export default function() {
         ShippedDate: {
             "type": "Edm.DateTimeOffset"
         }
-    };
+    });
 
-    types["NorthwindModel.Summary_of_Sales_by_Quarter"] = {
+    types["NorthwindModel.Summary_of_Sales_by_Quarter"] = $data("$data.Entity").extend("NorthwindModel.Summary_of_Sales_by_Quarter", {
         ShippedDate: {
             "type": "Edm.DateTimeOffset"
         },
@@ -1005,9 +1009,9 @@ export default function() {
         Subtotal: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    types["NorthwindModel.Summary_of_Sales_by_Year"] = {
+    types["NorthwindModel.Summary_of_Sales_by_Year"] = $data("$data.Entity").extend("NorthwindModel.Summary_of_Sales_by_Year", {
         ShippedDate: {
             "type": "Edm.DateTimeOffset"
         },
@@ -1020,9 +1024,9 @@ export default function() {
         Subtotal: {
             "type": "Edm.Decimal"
         }
-    };
+    });
 
-    exports.type = types["ODataWebExperimental.Northwind.Model.NorthwindEntities"] = {
+    exports.type = types["ODataWebExperimental.Northwind.Model.NorthwindEntities"] = $data("$data.EntityContext").extend("ODataWebExperimental.Northwind.Model.NorthwindEntities", {
         Categories: {
             "type": "$data.EntitySet",
             "elementType": "NorthwindModel.Category"
@@ -1127,9 +1131,9 @@ export default function() {
             "type": "$data.EntitySet",
             "elementType": "NorthwindModel.Summary_of_Sales_by_Year"
         }
-    };
+    });
 
-    exports.models = {
+    exports.NorthwindModel = {
         "Category": types["NorthwindModel.Category"],
         "CustomerDemographic": types["NorthwindModel.CustomerDemographic"],
         "Customer": types["NorthwindModel.Customer"],
@@ -1158,7 +1162,29 @@ export default function() {
         "Summary_of_Sales_by_Year": types["NorthwindModel.Summary_of_Sales_by_Year"]
     };
 
-    exports.oDataServiceHost= "http://services.odata.org/V4/Northwind/Northwind.svc";
+    exports.ODataWebExperimental = {
+        "Northwind": {
+            "Model": {
+                "NorthwindEntities": types["ODataWebExperimental.Northwind.Model.NorthwindEntities"]
+            }
+        }
+    };
 
-    return exports;
-}
+    var ctxType = exports.type;
+    exports.factory = function(config) {
+        if (ctxType) {
+            var cfg = $data.typeSystem.extend({
+                name: "oData",
+                oDataServiceHost: "http://services.odata.org/V4/Northwind/Northwind.svc",
+                withCredentials: false,
+                maxDataServiceVersion: "4.0"
+            }, config);
+            return new ctxType(cfg);
+        } else {
+            return null;
+        }
+    };
+
+    if (typeof Reflect !== "undefined" && typeof Reflect.defineMetadata === "function") {}
+
+});
