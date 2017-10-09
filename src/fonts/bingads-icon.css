@@ -1,0 +1,273 @@
+@font-face {
+  font-family: 'bingads';
+  src:  url('bingadsicon.eot');
+  src:  url('bingadsicon.eot#iefix') format('embedded-opentype'),
+    url('bingadsicon.ttf') format('truetype'),
+    url('bingadsicon.woff') format('woff'),
+    url('bingadsicon.svg#bingads') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="bingads-icon-"], [class*=" bingads-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bingads' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bingads-icon-active-new:before {
+  content: "\e900";
+}
+.bingads-icon-add:before {
+  content: "\e901";
+}
+.bingads-icon-app-install:before {
+  content: "\e902";
+}
+.bingads-icon-asc:before {
+  content: "\e903";
+}
+.bingads-icon-bell:before {
+  content: "\e904";
+}
+.bingads-icon-caret-down:before {
+  content: "\e905";
+}
+.bingads-icon-caret-left:before {
+  content: "\e906";
+}
+.bingads-icon-caret-right:before {
+  content: "\e907";
+}
+.bingads-icon-caret-up:before {
+  content: "\e908";
+}
+.bingads-icon-chart-nodata:before {
+  content: "\e909";
+  color: #a2a2a2;
+}
+.bingads-icon-checked-thin:before {
+  content: "\e90a";
+}
+.bingads-icon-checked:before {
+  content: "\e90b";
+}
+.bingads-icon-close:before {
+  content: "\e90c";
+}
+.bingads-icon-coach:before {
+  content: "\e90d";
+  color: #008272;
+}
+.bingads-icon-columnchooser:before {
+  content: "\e90e";
+}
+.bingads-icon-current-step:before {
+  content: "\e90f";
+}
+.bingads-icon-decrease:before {
+  content: "\e910";
+}
+.bingads-icon-deleted-new:before {
+  content: "\e911";
+}
+.bingads-icon-des:before {
+  content: "\e912";
+}
+.bingads-icon-dot:before {
+  content: "\e913";
+}
+.bingads-icon-download-round:before {
+  content: "\e914";
+}
+.bingads-icon-download:before {
+  content: "\e915";
+}
+.bingads-icon-dsa:before {
+  content: "\e916";
+  color: #000;
+}
+.bingads-icon-edit:before {
+  content: "\e917";
+}
+.bingads-icon-error:before {
+  content: "\e918";
+}
+.bingads-icon-filter:before {
+  content: "\e919";
+}
+.bingads-icon-gear:before {
+  content: "\e91a";
+}
+.bingads-icon-graph:before {
+  content: "\e91b";
+}
+.bingads-icon-guided-tour .path1:before {
+  content: "\e91c";
+  color: rgb(21, 112, 166);
+}
+.bingads-icon-guided-tour .path2:before {
+  content: "\e91d";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.bingads-icon-guided-tour .path3:before {
+  content: "\e91e";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.bingads-icon-handler:before {
+  content: "\e91f";
+}
+.bingads-icon-help:before {
+  content: "\e920";
+}
+.bingads-icon-import:before {
+  content: "\e921";
+}
+.bingads-icon-increase:before {
+  content: "\e922";
+}
+.bingads-icon-info:before {
+  content: "\e923";
+}
+.bingads-icon-landscape:before {
+  content: "\e924";
+  color: #e5e5e5;
+}
+.bingads-icon-left-thin:before {
+  content: "\e925";
+}
+.bingads-icon-left:before {
+  content: "\e926";
+}
+.bingads-icon-listbox-remove:before {
+  content: "\e927";
+}
+.bingads-icon-livechat:before {
+  content: "\e928";
+}
+.bingads-icon-logo:before {
+  content: "\e929";
+  color: #008273;
+}
+.bingads-icon-map-cross:before {
+  content: "\e92a";
+}
+.bingads-icon-map-dot:before {
+  content: "\e92b";
+}
+.bingads-icon-map-tick:before {
+  content: "\e92c";
+}
+.bingads-icon-microsoft-logo_rgb_c-gray:before {
+  content: "\e92d";
+  color: #505050;
+}
+.bingads-icon-opportunity:before {
+  content: "\e92e";
+}
+.bingads-icon-paused-new:before {
+  content: "\e92f";
+}
+.bingads-icon-phone-call:before {
+  content: "\e930";
+}
+.bingads-icon-play:before {
+  content: "\e931";
+}
+.bingads-icon-pointer:before {
+  content: "\e932";
+}
+.bingads-icon-popup:before {
+  content: "\e933";
+  color: #525252;
+}
+.bingads-icon-refresh:before {
+  content: "\e934";
+}
+.bingads-icon-research-keyword:before {
+  content: "\e935";
+}
+.bingads-icon-search:before {
+  content: "\e936";
+}
+.bingads-icon-shift-left:before {
+  content: "\e937";
+}
+.bingads-icon-shift-right:before {
+  content: "\e938";
+}
+.bingads-icon-shopping:before {
+  content: "\e939";
+}
+.bingads-icon-status-added:before {
+  content: "\e93a";
+}
+.bingads-icon-status-changed:before {
+  content: "\e93b";
+}
+.bingads-icon-status-delete:before {
+  content: "\e93c";
+  color: red;
+}
+.bingads-icon-status-draft:before {
+  content: "\e93d";
+}
+.bingads-icon-status-ok:before {
+  content: "\e93e";
+  color: green;
+}
+.bingads-icon-status-paused:before {
+  content: "\e93f";
+}
+.bingads-icon-status-processing:before {
+  content: "\e940";
+}
+.bingads-icon-status-suspended:before {
+  content: "\e941";
+  color: orange;
+}
+.bingads-icon-triangle-down:before {
+  content: "\e942";
+}
+.bingads-icon-triangle-left:before {
+  content: "\e943";
+}
+.bingads-icon-triangle-right:before {
+  content: "\e944";
+}
+.bingads-icon-ucm:before {
+  content: "\e945";
+}
+.bingads-icon-undo:before {
+  content: "\e946";
+}
+.bingads-icon-user:before {
+  content: "\e947";
+  color: #fff;
+}
+.bingads-icon-visit-website:before {
+  content: "\e948";
+}
+.bingads-icon-visits:before {
+  content: "\e949";
+}
+.bingads-icon-warning:before {
+  content: "\e94a";
+}
+.bingads-icon-web-conv:before {
+  content: "\e94b";
+}
+.bingads-icon-whatsnew:before {
+  content: "\e94c";
+}
