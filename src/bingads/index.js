@@ -7,6 +7,7 @@ import Toolbar from './toolbar/toolbar.js';
 import Grid from './grid/grid.js';
 import AlertGroup from './components/alert-group.js';
 import DatePicker from './components/datepicker.js';
+import Dropdown from './components/dropdown.js';
 
 import TripMetadata from './metadata/trip.js';
 import NorthWindMetadata from './metadata/northwind.js';
@@ -22,7 +23,9 @@ class BingAds extends Component {
         this.tripMetadata = TripMetadata();
         this.northWindMetadata = NorthWindMetadata();
 
-        this.generateEntries(this.tripMetadata);
+        this.metaData = this.northWindMetadata;
+
+        this.generateEntries(this.metaData);
     }
     
     componentWillMount() {
@@ -31,9 +34,9 @@ class BingAds extends Component {
         });
     }
 
-    entryDidChange(entryKey, entryItem, event) {
+    entryDidChange(item) {
         this.setState({
-            entry: entryKey
+            entry: item.name
         });
     }
 
@@ -42,13 +45,9 @@ class BingAds extends Component {
             return typeItem.type && typeItem.type.includes(".EntitySet");
         });
 
-        this.entryView = _.map(this.entries, (typeItem, typeKey) => {
-                            return (
-                                <label className="radio-inline">
-                                    <input type="radio" name="options" value={typeKey} onClick={_.bind(this.entryDidChange, this, typeKey, typeItem)}/> {typeKey}
-                                </label>
-                           );
-                        });
+        this.entryName = _.map(_.keys(this.entries), (entryKey) => {return {name: entryKey}});
+
+        this.entryView = <Dropdown enableSearch={true} selectedIndex={0} list={this.entryName} onClick={this.entryDidChange.bind(this)} />;
     }
 
     render() {
@@ -72,9 +71,9 @@ class BingAds extends Component {
 
                         {this.entryView}
 
-                        <Toolbar metaData={this.tripMetadata} entry={this.state.entry}/>
+                        <Toolbar metaData={this.metaData} entry={this.state.entry}/>
                         <p/> <p/> <p/>
-                        <Grid metaData={this.tripMetadata} entries={this.entries} entry={this.state.entry}/>
+                        <Grid metaData={this.metaData} entries={this.entries} entry={this.state.entry}/>
 
                         <h6 className="small">
                         Not all metrics are in real time. Clicks and impressions in the last 2 hours and conversions in the last 5 hours might not be included. Learn more

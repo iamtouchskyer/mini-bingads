@@ -5,6 +5,21 @@ import classNames from 'classnames';
 import Search from './search.js';
 import Pagination from './pagination.js';
 
+/* props
+fixedTitle
+title
+enableSearch
+selectedIndex
+itemPerpage
+sameWidthAsParent
+list : [
+    {name: x, ...},
+    {name: y, ...}
+
+onClick(item)
+]
+*/
+
 class Dropdown extends Component {
     constructor(props) {
         super(props);
