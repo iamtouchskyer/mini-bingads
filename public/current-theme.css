@@ -93,6 +93,12 @@ button.list-group-item .list-group-item-heading,
   cursor:pointer;
 }
 
+.bingads-grid {
+  word-break:break-all;
+  word-wrap:break-word;
+  table-layout:fixed;
+}
+
 .table th {
     background-color:#E5E5E5;
 }

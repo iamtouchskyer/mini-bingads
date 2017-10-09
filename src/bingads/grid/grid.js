@@ -41,27 +41,37 @@ class Grid extends Component {
         this.doFetch(nextProps.entry);
     }
 
-    doFetch(key) {
+    doFetch(endpoint) {
         this.setState({blocking: true});
-        this.store.findAll(key)
-            .then((peoples) => {
-                if (_.isArray(peoples)) {
-                    peoples = peoples[0];
+
+        const metaData = this.props.metaData;
+        const modelOfEndpoint = metaData.models[metaData.type[endpoint].elementType];
+        const titles = _.keys(modelOfEndpoint);
+
+        this.store.findAll(endpoint)
+            .then((result) => {
+                if (_.isArray(result)) {
+                    result = result[0];
                 }
 
-                this.titles = _.keys(peoples.value[0]);
-
-                const val = peoples.value; //_.take(peoples.value, _.size(peoples.value)-2);
-                this.rows = _.map(val, (item) => {
-                    let cols = _.map(_.values(item), (val) => {
-                        if (_.isArray(val)) {
+                this.titles = _.keys(modelOfEndpoint);
+                this.rows = _.map(result.value, (rowData) => {
+                    let cols = _.map(this.titles, (key) => {
+                        const value = rowData[key];
+                        if (_.isArray(value)) {
                             return "Array";
-                        } else if (_.isObject(val)) {
+                        } else if (_.isObject(value)) {
                             return "Object";
-                        } else if (_.isNull(val)) {
+                        } else if (_.isNull(value)) {
                             return "Null";
                         } else {
-                            return val;
+                            const IsValidBase64 = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+                            if (modelOfEndpoint[key].type === 'Edm.Binary' && IsValidBase64.test(value)) {
+                                const src = "data:image/png;base64, " + value.substr(104);
+                                return (<img src={src}/>);
+                            } else {
+                                return value;
+                            }
                         }
                     });
 

@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
 import './index.css';
-import App from './App';
+import BingAdsApp from './bingads/bingadsapp.js';
 import registerServiceWorker from './registerServiceWorker';
 
-
-global.jQuery = jQuery
-global.jquery = jQuery // jquery lowercase  was the solution
-global.$ = jQuery
+global.jQuery = jQuery;
+global.jquery = jQuery; // jquery lowercase  was the solution
+global.$ = jQuery;
 require('bootstrap');
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<BingAdsApp />, document.getElementById('root'));
 registerServiceWorker();

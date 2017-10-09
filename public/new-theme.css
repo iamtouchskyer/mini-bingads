@@ -84,6 +84,12 @@ button.list-group-item .list-group-item-heading,
     background-color:#FFFFFF;
 }
 
+.bingads-grid {
+  word-break:break-all;
+  word-wrap:break-word;
+  table-layout:fixed;
+}
+
 .table th.sortable {
     cursor:pointer;
 }

@@ -4,7 +4,7 @@ export default function() {
     var exports = {};
     var types = {};
 
-    types["NorthwindModel.Category"] = {
+    types["Category"] = {
         CategoryID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -27,12 +27,12 @@ export default function() {
         },
         Products: {
             "type": "Array",
-            "elementType": "NorthwindModel.Product",
+            "elementType": "Product",
             "inverseProperty": "Category"
         }
     };
 
-    types["NorthwindModel.CustomerDemographic"] = {
+    types["CustomerDemographic"] = {
         CustomerTypeID: {
             "type": "Edm.String",
             "nullable": false,
@@ -46,12 +46,12 @@ export default function() {
         },
         Customers: {
             "type": "Array",
-            "elementType": "NorthwindModel.Customer",
+            "elementType": "Customer",
             "inverseProperty": "CustomerDemographics"
         }
     };
 
-    types["NorthwindModel.Customer"] = {
+    types["Customer"] = {
         CustomerID: {
             "type": "Edm.String",
             "nullable": false,
@@ -103,17 +103,17 @@ export default function() {
         },
         Orders: {
             "type": "Array",
-            "elementType": "NorthwindModel.Order",
+            "elementType": "Order",
             "inverseProperty": "Customer"
         },
         CustomerDemographics: {
             "type": "Array",
-            "elementType": "NorthwindModel.CustomerDemographic",
+            "elementType": "CustomerDemographic",
             "inverseProperty": "Customers"
         }
     };
 
-    types["NorthwindModel.Employee"] = {
+    types["Employee"] = {
         EmployeeID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -191,26 +191,26 @@ export default function() {
         },
         Employees1: {
             "type": "Array",
-            "elementType": "NorthwindModel.Employee",
+            "elementType": "Employee",
             "inverseProperty": "Employee1"
         },
         Employee1: {
-            "type": "NorthwindModel.Employee",
+            "type": "Employee",
             "inverseProperty": "Employees1"
         },
         Orders: {
             "type": "Array",
-            "elementType": "NorthwindModel.Order",
+            "elementType": "Order",
             "inverseProperty": "Employee"
         },
         Territories: {
             "type": "Array",
-            "elementType": "NorthwindModel.Territory",
+            "elementType": "Territory",
             "inverseProperty": "Employees"
         }
     };
 
-    types["NorthwindModel.Order_Detail"] = {
+    types["Order_Detail"] = {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -239,20 +239,20 @@ export default function() {
             "required": true
         },
         Order: {
-            "type": "NorthwindModel.Order",
+            "type": "Order",
             "nullable": false,
             "required": true,
             "inverseProperty": "Order_Details"
         },
         Product: {
-            "type": "NorthwindModel.Product",
+            "type": "Product",
             "nullable": false,
             "required": true,
             "inverseProperty": "Order_Details"
         }
     };
 
-    types["NorthwindModel.Order"] = {
+    types["Order"] = {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -306,25 +306,25 @@ export default function() {
             "maxLength": 15
         },
         Customer: {
-            "type": "NorthwindModel.Customer",
+            "type": "Customer",
             "inverseProperty": "Orders"
         },
         Employee: {
-            "type": "NorthwindModel.Employee",
+            "type": "Employee",
             "inverseProperty": "Orders"
         },
         Order_Details: {
             "type": "Array",
-            "elementType": "NorthwindModel.Order_Detail",
+            "elementType": "Order_Detail",
             "inverseProperty": "Order"
         },
         Shipper: {
-            "type": "NorthwindModel.Shipper",
+            "type": "Shipper",
             "inverseProperty": "Orders"
         }
     };
 
-    types["NorthwindModel.Product"] = {
+    types["Product"] = {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -365,21 +365,21 @@ export default function() {
             "required": true
         },
         Category: {
-            "type": "NorthwindModel.Category",
+            "type": "Category",
             "inverseProperty": "Products"
         },
         Order_Details: {
             "type": "Array",
-            "elementType": "NorthwindModel.Order_Detail",
+            "elementType": "Order_Detail",
             "inverseProperty": "Product"
         },
         Supplier: {
-            "type": "NorthwindModel.Supplier",
+            "type": "Supplier",
             "inverseProperty": "Products"
         }
     };
 
-    types["NorthwindModel.Region"] = {
+    types["Region"] = {
         RegionID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -394,12 +394,12 @@ export default function() {
         },
         Territories: {
             "type": "Array",
-            "elementType": "NorthwindModel.Territory",
+            "elementType": "Territory",
             "inverseProperty": "Region"
         }
     };
 
-    types["NorthwindModel.Shipper"] = {
+    types["Shipper"] = {
         ShipperID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -418,12 +418,12 @@ export default function() {
         },
         Orders: {
             "type": "Array",
-            "elementType": "NorthwindModel.Order",
+            "elementType": "Order",
             "inverseProperty": "Shipper"
         }
     };
 
-    types["NorthwindModel.Supplier"] = {
+    types["Supplier"] = {
         SupplierID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -478,12 +478,12 @@ export default function() {
         },
         Products: {
             "type": "Array",
-            "elementType": "NorthwindModel.Product",
+            "elementType": "Product",
             "inverseProperty": "Supplier"
         }
     };
 
-    types["NorthwindModel.Territory"] = {
+    types["Territory"] = {
         TerritoryID: {
             "type": "Edm.String",
             "nullable": false,
@@ -503,19 +503,19 @@ export default function() {
             "required": true
         },
         Region: {
-            "type": "NorthwindModel.Region",
+            "type": "Region",
             "nullable": false,
             "required": true,
             "inverseProperty": "Territories"
         },
         Employees: {
             "type": "Array",
-            "elementType": "NorthwindModel.Employee",
+            "elementType": "Employee",
             "inverseProperty": "Territories"
         }
     };
 
-    types["NorthwindModel.Alphabetical_list_of_product"] = {
+    types["Alphabetical_list_of_product"] = {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -566,7 +566,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Category_Sales_for_1997"] = {
+    types["Category_Sales_for_1997"] = {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -579,7 +579,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Current_Product_List"] = {
+    types["Current_Product_List"] = {
         ProductID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -595,7 +595,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Customer_and_Suppliers_by_City"] = {
+    types["Customer_and_Suppliers_by_City"] = {
         City: {
             "type": "Edm.String",
             "maxLength": 15
@@ -620,7 +620,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Invoice"] = {
+    types["Invoice"] = {
         ShipName: {
             "type": "Edm.String",
             "maxLength": 40
@@ -744,7 +744,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Order_Details_Extended"] = {
+    types["Order_Details_Extended"] = {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -787,7 +787,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Order_Subtotal"] = {
+    types["Order_Subtotal"] = {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -799,7 +799,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Orders_Qry"] = {
+    types["Orders_Qry"] = {
         OrderID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -881,7 +881,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Product_Sales_for_1997"] = {
+    types["Product_Sales_for_1997"] = {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -901,7 +901,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Products_Above_Average_Price"] = {
+    types["Products_Above_Average_Price"] = {
         ProductName: {
             "type": "Edm.String",
             "nullable": false,
@@ -914,7 +914,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Products_by_Category"] = {
+    types["Products_by_Category"] = {
         CategoryName: {
             "type": "Edm.String",
             "nullable": false,
@@ -944,7 +944,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Sales_by_Category"] = {
+    types["Sales_by_Category"] = {
         CategoryID: {
             "type": "Edm.Int32",
             "nullable": false,
@@ -970,7 +970,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Sales_Totals_by_Amount"] = {
+    types["Sales_Totals_by_Amount"] = {
         SaleAmount: {
             "type": "Edm.Decimal"
         },
@@ -992,7 +992,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Summary_of_Sales_by_Quarter"] = {
+    types["Summary_of_Sales_by_Quarter"] = {
         ShippedDate: {
             "type": "Edm.DateTimeOffset"
         },
@@ -1007,7 +1007,7 @@ export default function() {
         }
     };
 
-    types["NorthwindModel.Summary_of_Sales_by_Year"] = {
+    types["Summary_of_Sales_by_Year"] = {
         ShippedDate: {
             "type": "Edm.DateTimeOffset"
         },
@@ -1025,137 +1025,137 @@ export default function() {
     exports.type = types["ODataWebExperimental.Northwind.Model.NorthwindEntities"] = {
         Categories: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Category"
+            "elementType": "Category"
         },
         CustomerDemographics: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.CustomerDemographic"
+            "elementType": "CustomerDemographic"
         },
         Customers: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Customer"
+            "elementType": "Customer"
         },
         Employees: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Employee"
+            "elementType": "Employee"
         },
         Order_Details: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Order_Detail"
+            "elementType": "Order_Detail"
         },
         Orders: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Order"
+            "elementType": "Order"
         },
         Products: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Product"
+            "elementType": "Product"
         },
         Regions: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Region"
+            "elementType": "Region"
         },
         Shippers: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Shipper"
+            "elementType": "Shipper"
         },
         Suppliers: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Supplier"
+            "elementType": "Supplier"
         },
         Territories: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Territory"
+            "elementType": "Territory"
         },
         Alphabetical_list_of_products: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Alphabetical_list_of_product"
+            "elementType": "Alphabetical_list_of_product"
         },
         Category_Sales_for_1997: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Category_Sales_for_1997"
+            "elementType": "Category_Sales_for_1997"
         },
         Current_Product_Lists: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Current_Product_List"
+            "elementType": "Current_Product_List"
         },
         Customer_and_Suppliers_by_Cities: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Customer_and_Suppliers_by_City"
+            "elementType": "Customer_and_Suppliers_by_City"
         },
         Invoices: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Invoice"
+            "elementType": "Invoice"
         },
         Order_Details_Extendeds: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Order_Details_Extended"
+            "elementType": "Order_Details_Extended"
         },
         Order_Subtotals: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Order_Subtotal"
+            "elementType": "Order_Subtotal"
         },
         Orders_Qries: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Orders_Qry"
+            "elementType": "Orders_Qry"
         },
         Product_Sales_for_1997: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Product_Sales_for_1997"
+            "elementType": "Product_Sales_for_1997"
         },
         Products_Above_Average_Prices: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Products_Above_Average_Price"
+            "elementType": "Products_Above_Average_Price"
         },
         Products_by_Categories: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Products_by_Category"
+            "elementType": "Products_by_Category"
         },
         Sales_by_Categories: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Sales_by_Category"
+            "elementType": "Sales_by_Category"
         },
         Sales_Totals_by_Amounts: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Sales_Totals_by_Amount"
+            "elementType": "Sales_Totals_by_Amount"
         },
         Summary_of_Sales_by_Quarters: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Summary_of_Sales_by_Quarter"
+            "elementType": "Summary_of_Sales_by_Quarter"
         },
         Summary_of_Sales_by_Years: {
             "type": "$data.EntitySet",
-            "elementType": "NorthwindModel.Summary_of_Sales_by_Year"
+            "elementType": "Summary_of_Sales_by_Year"
         }
     };
 
     exports.models = {
-        "Category": types["NorthwindModel.Category"],
-        "CustomerDemographic": types["NorthwindModel.CustomerDemographic"],
-        "Customer": types["NorthwindModel.Customer"],
-        "Employee": types["NorthwindModel.Employee"],
-        "Order_Detail": types["NorthwindModel.Order_Detail"],
-        "Order": types["NorthwindModel.Order"],
-        "Product": types["NorthwindModel.Product"],
-        "Region": types["NorthwindModel.Region"],
-        "Shipper": types["NorthwindModel.Shipper"],
-        "Supplier": types["NorthwindModel.Supplier"],
-        "Territory": types["NorthwindModel.Territory"],
-        "Alphabetical_list_of_product": types["NorthwindModel.Alphabetical_list_of_product"],
-        "Category_Sales_for_1997": types["NorthwindModel.Category_Sales_for_1997"],
-        "Current_Product_List": types["NorthwindModel.Current_Product_List"],
-        "Customer_and_Suppliers_by_City": types["NorthwindModel.Customer_and_Suppliers_by_City"],
-        "Invoice": types["NorthwindModel.Invoice"],
-        "Order_Details_Extended": types["NorthwindModel.Order_Details_Extended"],
-        "Order_Subtotal": types["NorthwindModel.Order_Subtotal"],
-        "Orders_Qry": types["NorthwindModel.Orders_Qry"],
-        "Product_Sales_for_1997": types["NorthwindModel.Product_Sales_for_1997"],
-        "Products_Above_Average_Price": types["NorthwindModel.Products_Above_Average_Price"],
-        "Products_by_Category": types["NorthwindModel.Products_by_Category"],
-        "Sales_by_Category": types["NorthwindModel.Sales_by_Category"],
-        "Sales_Totals_by_Amount": types["NorthwindModel.Sales_Totals_by_Amount"],
-        "Summary_of_Sales_by_Quarter": types["NorthwindModel.Summary_of_Sales_by_Quarter"],
-        "Summary_of_Sales_by_Year": types["NorthwindModel.Summary_of_Sales_by_Year"]
+        "Category": types["Category"],
+        "CustomerDemographic": types["CustomerDemographic"],
+        "Customer": types["Customer"],
+        "Employee": types["Employee"],
+        "Order_Detail": types["Order_Detail"],
+        "Order": types["Order"],
+        "Product": types["Product"],
+        "Region": types["Region"],
+        "Shipper": types["Shipper"],
+        "Supplier": types["Supplier"],
+        "Territory": types["Territory"],
+        "Alphabetical_list_of_product": types["Alphabetical_list_of_product"],
+        "Category_Sales_for_1997": types["Category_Sales_for_1997"],
+        "Current_Product_List": types["Current_Product_List"],
+        "Customer_and_Suppliers_by_City": types["Customer_and_Suppliers_by_City"],
+        "Invoice": types["Invoice"],
+        "Order_Details_Extended": types["Order_Details_Extended"],
+        "Order_Subtotal": types["Order_Subtotal"],
+        "Orders_Qry": types["Orders_Qry"],
+        "Product_Sales_for_1997": types["Product_Sales_for_1997"],
+        "Products_Above_Average_Price": types["Products_Above_Average_Price"],
+        "Products_by_Category": types["Products_by_Category"],
+        "Sales_by_Category": types["Sales_by_Category"],
+        "Sales_Totals_by_Amount": types["Sales_Totals_by_Amount"],
+        "Summary_of_Sales_by_Quarter": types["Summary_of_Sales_by_Quarter"],
+        "Summary_of_Sales_by_Year": types["Summary_of_Sales_by_Year"]
     };
 
     exports.oDataServiceHost= "http://services.odata.org/V4/Northwind/Northwind.svc";
