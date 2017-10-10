@@ -28,18 +28,7 @@ class Dropdown extends Component {
             show1stLevelDropdown: false,
             showSubMenu: {},
             refreshNeeded: false,
-            title: this.props.list[0].name,
-        };
-
-        this.config = {
-            title: this.props.title,
-            enableSearch: this.props.enableSearch,
-            list: _.map(this.props.list, (listItem) => {
-                listItem['DropdownItemId'] = _.uniqueId('DropdownItem');
-                return listItem;
-            }),
-            selectedIndex: this.props.slectedIndex ? this.props.selectedIndex : 0,
-            itemPerPage: this.props.itemPerPage ? this.props.itemPerPage : 10,
+            title: "",
         };
 
         this.paginationControl = {
@@ -55,6 +44,39 @@ class Dropdown extends Component {
         };
 
         this.id = _.uniqueId("SearchPaginationDropdown");
+    }
+
+    setUpConfig(props) {
+        this.config = {
+            title: props.title,
+            enableSearch: props.enableSearch,
+            list: _.map(props.list, (listItem) => {
+                listItem['DropdownItemId'] = _.uniqueId('DropdownItem');
+                return listItem;
+            }),
+            selectedIndex: props.slectedIndex ? props.selectedIndex : 0,
+            itemPerPage: props.itemPerPage ? props.itemPerPage : 10,
+        };
+
+        this.setState({title: props.list[0].name});
+    }
+
+    componentWillMount() {
+        this.setUpConfig(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (_.isEqualWith(nextProps, this.props, (next, current) => {
+            if (_.isFunction(next) && _.isFunction(current)) {
+                return true;
+            } else {
+                return _.isEqual(next, current);
+            }
+        })) {
+            return;
+        }
+
+        this.setUpConfig(nextProps);
     }
 
     componentDidMount() {

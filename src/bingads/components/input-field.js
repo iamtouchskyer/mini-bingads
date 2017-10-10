@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
 import classNames from 'classnames';
 
 class InputField extends Component {

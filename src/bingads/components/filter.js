@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
-import Dropdown from './dropdown.js';
 import FilterItem from './filter-item.js';
 
 const DecimalTypeDropdown = [
@@ -131,7 +130,10 @@ class Filter extends Component {
     }
 
     addAnotherDidClick() {
-        this.predicateItemList.push({key:_.uniqueId()});
+        this.predicateItemList.push(
+            <FilterItem key={_.uniqueId()} dropdownList={this.dropdownList} filters={this.filters} enums={this.enumFiltrs}/>
+            );
+
         this.setState({refresh: !this.state.refresh});
     }
 
@@ -148,9 +150,7 @@ class Filter extends Component {
     }
 
     applyDidClick(event) {
-        const isValid = _.some(this.predicateItemList, (predicateItem) => {
-            return predicateItem.isValid();
-        });
+        const isValid = true;
 
         if (isValid) {
             this.props.callBack && this.props.callBack('FilterDidApply');
@@ -169,7 +169,7 @@ class Filter extends Component {
                         <span className="glyphicon glyphicon-plus" tabIndex={0} role="button" onClick={_.bind(this.addDidClick, this, item)}></span>
                         <span className="glyphicon glyphicon-remove" tabIndex={0} role="button" onClick={_.bind(this.removeDidClick, this, item)}></span>
                     </div>
-                    <FilterItem key={item.key} dropdownList={this.dropdownList} filters={this.filters} enums={this.enumFiltrs}/>
+                    {item}
                 </div>
             );
         });

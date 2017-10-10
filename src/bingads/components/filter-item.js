@@ -44,19 +44,19 @@ class FilterItem extends Component {
     onFilterItemChanged(item) {
         const res = deepFind(this.filters, item.name);
         if (res) {
-            this.setState({
-                operationDropdown: res.dropdown
-            });
-
             if (res.type === 'enum' && res.options) {
                 this.setState({
                     inputField: <Checkboxes options={res.options} />
                 });
             } else {
                 this.setState({
-                    inputField: <InputField integerOnly={res.type === 'Decimal'}/>
+                    inputField: <InputField key={_.uniqueId()} integerOnly={res.type === 'Decimal'}/>
                 });
             }
+            
+            this.setState({
+                operationDropdown: res.dropdown
+            });
         }
     }
 
